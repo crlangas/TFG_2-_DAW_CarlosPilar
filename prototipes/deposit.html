@@ -1,0 +1,247 @@
+<!-- MrFinance Deposit Funds -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Deposit Funds | MrFinance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#313030",
+                        "secondary-fixed": "#dae1ff",
+                        "on-secondary-fixed-variant": "#003fa4",
+                        "on-surface-variant": "#4c4546",
+                        "surface-dim": "#dcd9d9",
+                        "primary": "#000000",
+                        "surface-container": "#f0edec",
+                        "background": "#fcf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ebe7e7",
+                        "primary-fixed": "#e2e2e2",
+                        "outline": "#7e7576",
+                        "inverse-primary": "#c6c6c6",
+                        "secondary": "#0050cc",
+                        "on-primary-container": "#848484",
+                        "on-tertiary-fixed": "#002111",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#b3c5ff",
+                        "surface": "#fcf9f8",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary": "#000000",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary-container": "#00975e",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "on-primary-fixed": "#1b1b1b",
+                        "surface-tint": "#5e5e5e",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fcf9f8",
+                        "tertiary-fixed-dim": "#31e193",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#005231",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#002111",
+                        "tertiary-fixed": "#59fead",
+                        "on-secondary-container": "#f9f7ff",
+                        "surface-variant": "#e5e2e1",
+                        "secondary-container": "#0266ff",
+                        "on-secondary-fixed": "#001849",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#cfc4c5",
+                        "primary-container": "#1b1b1b",
+                        "on-surface": "#1c1b1b",
+                        "on-primary-fixed-variant": "#474747"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#fcf9f8] dark:bg-stone-950 opacity-80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<a href="portfolio.html"><a href="portfolio.html"><button class="material-symbols-outlined p-2 hover:bg-surface-container-low rounded-full transition-colors">arrow_back</button></a></a>
+<span class="text-xl font-black text-black dark:text-white uppercase tracking-tighter">MrFinance</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-8">
+<a class="text-[#4c4546] dark:text-stone-400 font-medium hover:text-black transition-colors duration-200" href="portfolio.html">Portfolio</a>
+<a class="text-[#4c4546] dark:text-stone-400 font-medium hover:text-black transition-colors duration-200" href="account-info.html">Account Info</a>
+<a href="#">Historical</a>
+<a href="#">Explore</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">notifications</span>
+<a href="deposit-dark.html" title="Switch theme" class="p-2 text-on-surface-variant hover:text-primary transition-colors font-bold text-xs border border-outline-variant rounded-lg px-3 py-1">🌙 Dark</a>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Close-up professional portrait of a smiling man in a business casual setting with soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsl7S8sZtgLiZTZoOGwJYsoB35e4hp8_XNr-CC4fdFHgdmK_znBhyypo5bQz2z-XjCkxoJKN6Qn6WcV-Raihke3iUqAAmK34p7cI7udZr1NKk4TZrux4WuRvuUs2LX4dnr7mp7Yynlh_6XV_7Oe_LlRJUS99mtyZY3NpqjMH-_wU8RlqhEST2hQmkBeJWG01jzKN8-2G3kd0Xmla9-cqIxUFhfRsLhVS2bMQp69ZbDRQzRbUQMWs3USyHl4eE3ON5lGucT6BGpthDg"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-6 max-w-3xl mx-auto">
+<!-- Editorial Header -->
+<div class="mb-14">
+<h1 class="text-5xl font-black tracking-tighter text-on-background mb-4">Deposit Funds</h1>
+<p class="text-on-surface-variant text-lg max-w-md">Move money from your external accounts into your MrFinance portfolio securely.</p>
+</div>
+<!-- Deposit Flow Container -->
+<div class="space-y-8">
+<!-- Step 1: Amount Input -->
+<section class="bg-surface-container-lowest p-8 rounded-[2rem] shadow-sm">
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-6">Enter Amount</label>
+<div class="relative flex items-center justify-center py-10">
+<span class="absolute left-0 text-4xl font-light text-on-surface-variant">$</span>
+<input class="w-full text-center text-7xl font-bold tracking-tighter bg-transparent border-none focus:ring-0 text-on-background p-0" placeholder="0.00" type="text" value="5,000.00"/>
+</div>
+<div class="grid grid-cols-3 gap-4 mt-6">
+<button class="py-3 px-4 bg-surface-container-low rounded-xl text-sm font-semibold hover:bg-surface-container-high transition-colors">+$100</button>
+<button class="py-3 px-4 bg-surface-container-low rounded-xl text-sm font-semibold hover:bg-surface-container-high transition-colors">+$500</button>
+<button class="py-3 px-4 bg-surface-container-low rounded-xl text-sm font-semibold hover:bg-surface-container-high transition-colors">+$1,000</button>
+</div>
+</section>
+<!-- Step 2: Source Account -->
+<section class="bg-surface-container-low p-8 rounded-[2rem]">
+<div class="flex justify-between items-center mb-6">
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant">From Account</label>
+<button class="text-secondary text-xs font-bold hover:underline">Link New</button>
+</div>
+<div class="space-y-3">
+<!-- Active Account Selection -->
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest rounded-2xl shadow-sm cursor-pointer group hover:bg-surface-bright transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<p class="font-bold text-on-background">Chase Checking •••• 8829</p>
+<p class="text-sm text-on-surface-variant">Available: $12,450.00</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<!-- Inactive Account Option -->
+<div class="flex items-center justify-between p-5 bg-transparent rounded-2xl border border-transparent hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="flex items-center gap-4 opacity-60">
+<div class="w-12 h-12 bg-surface-container-highest rounded-xl flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<p class="font-bold text-on-background">Wells Fargo •••• 1102</p>
+<p class="text-sm text-on-surface-variant">Available: $3,210.00</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant">radio_button_unchecked</span>
+</div>
+</div>
+</section>
+<!-- Step 3: Destination -->
+<section class="bg-surface-container-low p-8 rounded-[2rem]">
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-6">To Destination</label>
+<div class="flex items-center gap-4 p-5 bg-surface-container-lowest rounded-2xl shadow-sm">
+<div class="w-12 h-12 bg-tertiary-fixed-dim rounded-xl flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+<div>
+<p class="font-bold text-on-background">Main Portfolio</p>
+<p class="text-sm text-on-surface-variant">Current Balance: $48,290.15</p>
+</div>
+</div>
+</section>
+<!-- Summary & Confirmation -->
+<div class="pt-4 px-4 space-y-4">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Frequency</span>
+<span class="font-bold text-on-background">One-time Deposit</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Arrival Time</span>
+<span class="font-bold text-on-background">1-3 Business Days</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Transaction Fee</span>
+<span class="font-bold text-tertiary-fixed-dim bg-tertiary-container px-2 py-0.5 rounded text-[10px] uppercase tracking-tighter">No Fee</span>
+</div>
+</div>
+<!-- Action Button -->
+<div class="pt-8">
+<button class="w-full bg-primary text-on-primary py-5 rounded-2xl font-bold text-lg hover:scale-[1.01] active:scale-[0.98] transition-all shadow-xl shadow-primary/10 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lock</span>
+                Confirm Deposit
+            </button>
+<p class="text-center text-xs text-on-surface-variant mt-6 flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+                Secured with bank-grade 256-bit encryption
+            </p>
+</div>
+</div>
+</main>
+<!-- Success Feedback (Hidden by default, conceptual) -->
+<div class="fixed inset-0 bg-background/90 backdrop-blur-xl z-[60] flex items-center justify-center p-6 hidden">
+<div class="max-w-md w-full text-center space-y-8">
+<div class="w-24 h-24 bg-tertiary-fixed-dim rounded-full flex items-center justify-center mx-auto shadow-2xl shadow-tertiary-fixed-dim/20">
+<span class="material-symbols-outlined text-5xl text-on-tertiary-fixed">check</span>
+</div>
+<div>
+<h2 class="text-4xl font-black tracking-tight">Deposit Initiated</h2>
+<p class="text-on-surface-variant mt-4">Your transfer of <span class="text-on-background font-bold">$5,000.00</span> is being processed. We'll notify you when the funds land.</p>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-bold">Go to Portfolio</button>
+</div>
+</div>
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen fixed left-0 top-0 w-64 bg-[#f6f3f2] dark:bg-stone-900 p-6 space-y-8">
+<div class="flex items-center gap-4 mb-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsl7S8sZtgLiZTZoOGwJYsoB35e4hp8_XNr-CC4fdFHgdmK_znBhyypo5bQz2z-XjCkxoJKN6Qn6WcV-Raihke3iUqAAmK34p7cI7udZr1NKk4TZrux4WuRvuUs2LX4dnr7mp7Yynlh_6XV_7Oe_LlRJUS99mtyZY3NpqjMH-_wU8RlqhEST2hQmkBeJWG01jzKN8-2G3kd0Xmla9-cqIxUFhfRsLhVS2bMQp69ZbDRQzRbUQMWs3USyHl4eE3ON5lGucT6BGpthDg"/>
+</div>
+<div>
+<span class="text-2xl font-black text-black dark:text-white block">MrFinance</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Premium Curator</span>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-3 bg-[#ffffff] dark:bg-stone-800 text-black dark:text-white rounded-xl px-4 py-3 shadow-sm cursor-pointer transition-transform active:translate-x-1">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-medium text-sm">Portfolio</span>
+</div>
+<div class="flex items-center gap-3 text-[#4c4546] dark:text-stone-400 px-4 py-3 hover:bg-[#e5e2e1] dark:hover:bg-stone-800 transition-all duration-200 cursor-pointer active:translate-x-1 rounded-xl">
+<span class="material-symbols-outlined">person</span>
+<span class="font-medium text-sm">Account Info</span>
+</div>
+<div class="flex items-center gap-3 text-[#4c4546] dark:text-stone-400 px-4 py-3 hover:bg-[#e5e2e1] dark:hover:bg-stone-800 transition-all duration-200 cursor-pointer active:translate-x-1 rounded-xl">
+<span class="material-symbols-outlined">history</span>
+<span class="font-medium text-sm">Historical</span>
+</div>
+<div class="flex items-center gap-3 text-[#4c4546] dark:text-stone-400 px-4 py-3 hover:bg-[#e5e2e1] dark:hover:bg-stone-800 transition-all duration-200 cursor-pointer active:translate-x-1 rounded-xl">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-medium text-sm">Explore</span>
+</div>
+</div>
+</nav>
+</body></html>

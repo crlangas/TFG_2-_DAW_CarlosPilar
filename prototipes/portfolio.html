@@ -1,0 +1,285 @@
+<!-- MrFinance Dashboard -->
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MrFinance | Portfolio Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#313030",
+                        "secondary-fixed": "#dae1ff",
+                        "on-secondary-fixed-variant": "#003fa4",
+                        "on-surface-variant": "#4c4546",
+                        "surface-dim": "#dcd9d9",
+                        "primary": "#000000",
+                        "surface-container": "#f0edec",
+                        "background": "#fcf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ebe7e7",
+                        "primary-fixed": "#e2e2e2",
+                        "outline": "#7e7576",
+                        "inverse-primary": "#c6c6c6",
+                        "secondary": "#0050cc",
+                        "on-primary-container": "#848484",
+                        "on-tertiary-fixed": "#002111",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#b3c5ff",
+                        "surface": "#fcf9f8",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary": "#000000",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary-container": "#00975e",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "on-primary-fixed": "#1b1b1b",
+                        "surface-tint": "#5e5e5e",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fcf9f8",
+                        "tertiary-fixed-dim": "#31e193",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#005231",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#002111",
+                        "tertiary-fixed": "#59fead",
+                        "on-secondary-container": "#f9f7ff",
+                        "surface-variant": "#e5e2e1",
+                        "secondary-container": "#0266ff",
+                        "on-secondary-fixed": "#001849",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#cfc4c5",
+                        "primary-container": "#1b1b1b",
+                        "on-surface": "#1c1b1b",
+                        "on-primary-fixed-variant": "#474747"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-secondary/20">
+<!-- TopAppBar -->
+<header class="bg-[#fcf9f8] dark:bg-stone-950 opacity-80 backdrop-blur-xl fixed top-0 w-full z-50">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-7xl mx-auto">
+<div class="text-xl font-black text-black dark:text-white uppercase tracking-tighter font-['Inter']">MrFinance</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6"><a class="text-black dark:text-white font-bold border-b-2 border-black dark:border-white transition-colors duration-200" href="portfolio.html">Portfolio</a><a class="text-[#4c4546] dark:text-stone-400 font-medium hover:text-black dark:hover:text-white transition-colors duration-200" href="account-info.html">Account Info</a><a href="#">Historical</a><a href="#">Explore</a></nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<a href="portfolio-dark.html" title="Switch theme" class="p-2 text-on-surface-variant hover:text-primary transition-colors font-bold text-xs border border-outline-variant rounded-lg px-3 py-1">🌙 Dark</a>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User profile avatar" data-alt="close-up portrait of a professional man with a clean haircut and neutral expression in soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9FKr84I9eBeKzbK7TiYz9FxK22tCh9_EkHzaISbKD0gnYR-1BlDBfBPXMDH-b8GG19wlMMqvGnw5V2t82S-hCXm7MyraCRjDTKuVXVXZQlW4Kk1OW1W1jpxtcNyfxtIc2WVd8IdP9TtXEyhGo6mNyGbs3zI39IMK6kLFe16A7DPRlHpY7SWEDIGoatcmUo8aFyWar_tngWExEkXScgCJ8oT1Su4zZlCk9z5rjk_yyadLDxAg5b9FS9RxfVRmkdS86U0CD6l0UIMjO"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex flex-col h-screen fixed left-0 top-0 p-6 space-y-8 bg-[#f6f3f2] dark:bg-stone-900 h-screen w-64 border-r-0 z-40 pt-24">
+<div class="px-4">
+<h2 class="text-2xl font-black text-black dark:text-white font-['Inter']">MrFinance</h2>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest font-medium">Premium Curator</p>
+</div>
+<nav class="flex-1 space-y-2"><a class="flex items-center gap-3 bg-[#ffffff] dark:bg-stone-800 text-black dark:text-white rounded-xl px-4 py-3 shadow-sm active:translate-x-1 transition-transform" href="portfolio.html"><span class="material-symbols-outlined">account_balance_wallet</span><span class="font-['Inter'] text-sm font-medium">Portfolio</span></a><a class="flex items-center gap-3 text-[#4c4546] dark:text-stone-400 px-4 py-3 hover:bg-[#e5e2e1] dark:hover:bg-stone-800 transition-all duration-200" href="account-info.html"><span class="material-symbols-outlined">person</span><span class="font-['Inter'] text-sm font-medium">Account Info</span></a><a class="flex items-center gap-3 text-[#4c4546] dark:text-stone-400 px-4 py-3 hover:bg-[#e5e2e1] dark:hover:bg-stone-800 transition-all duration-200" href="#"><span class="material-symbols-outlined">history</span><span class="font-['Inter'] text-sm font-medium">Historical</span></a><a class="flex items-center gap-3 text-[#4c4546] dark:text-stone-400 px-4 py-3 hover:bg-[#e5e2e1] dark:hover:bg-stone-800 transition-all duration-200" href="#"><span class="material-symbols-outlined">explore</span><span class="font-['Inter'] text-sm font-medium">Explore</span></a></nav>
+<div class="px-4 py-6 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/10">
+<p class="text-xs font-bold text-secondary mb-1">Upgrade</p>
+<p class="text-xs text-on-surface-variant mb-3">Get 4% Interest on uninvested cash.</p>
+<button class="w-full py-2 bg-primary text-on-primary text-xs font-bold rounded-lg active:scale-95 transition-transform">
+                Go Premium
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-24 pb-12 px-8 min-h-screen max-w-7xl mx-auto">
+<!-- Hero Section: Editorial Boldness -->
+<section class="mb-16">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-on-surface-variant text-sm font-medium uppercase tracking-[0.2em] mb-4">Total Net Worth</h1>
+<div class="flex items-baseline gap-4">
+<span class="text-6xl md:text-8xl font-black tracking-tighter leading-none">€84,290.42</span>
+</div>
+<div class="mt-6 flex items-center gap-3">
+<span class="px-3 py-1 bg-surface-container-low rounded-full font-bold text-sm text-[#22c55e]">+€1,240.21 (1.5%)</span>
+<span class="text-on-surface-variant text-sm font-medium">Past 30 days</span>
+</div>
+</div>
+<div class="flex gap-2">
+<a href="deposit.html"><a href="deposit.html"><button class="px-6 py-3 bg-primary text-on-primary font-bold rounded-xl active:scale-95 transition-all">Add Funds</button></a></a>
+<button class="px-6 py-3 bg-surface-container-highest text-primary font-bold rounded-xl active:scale-95 transition-all">
+                        Withdraw
+                    </button>
+</div>
+</div>
+</section>
+<!-- Chart Section: Tonal Layering -->
+<section class="mb-14 bg-surface-container-low rounded-[2rem] p-8 relative overflow-hidden">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="font-bold text-xl mb-1">Portfolio Growth</h3>
+<p class="text-on-surface-variant text-sm">Performance tracking across all assets</p>
+</div>
+<div class="flex bg-surface-container-highest p-1 rounded-lg">
+<button class="px-3 py-1 text-xs font-bold bg-white rounded shadow-sm">1M</button>
+<button class="px-3 py-1 text-xs font-medium text-on-surface-variant hover:text-primary transition-colors">3M</button>
+<button class="px-3 py-1 text-xs font-medium text-on-surface-variant hover:text-primary transition-colors">1Y</button>
+<button class="px-3 py-1 text-xs font-medium text-on-surface-variant hover:text-primary transition-colors">ALL</button>
+</div>
+</div>
+<!-- Simulated Abstract Chart SVG -->
+<div class="h-64 w-full flex items-end">
+<svg class="w-full h-full drop-shadow-2xl" viewbox="0 0 1000 300">
+<defs>
+<lineargradient id="chartGradient" x1="0%" x2="0%" y1="0%" y2="100%"><stop offset="0%" style="stop-color:rgba(34, 197, 94, 0.2); stop-opacity:1"></stop><stop offset="100%" style="stop-color:rgba(34, 197, 94, 0); stop-opacity:0"></stop></lineargradient>
+</defs>
+<path d="M0,250 Q100,240 200,210 T400,180 T600,120 T800,90 T1000,40" fill="none" stroke="#22c55e" stroke-linecap="round" stroke-width="4"></path>
+<path d="M0,250 Q100,240 200,210 T400,180 T600,120 T800,90 T1000,40 V300 H0 Z" fill="url(#chartGradient)"></path>
+<circle cx="1000" cy="40" fill="#22c55e" r="6"></circle>
+<circle cx="1000" cy="40" fill="none" r="12" stroke="#22c55e" stroke-opacity="0.2" stroke-width="8"></circle>
+</svg>
+</div>
+<div class="mt-8 flex justify-between border-t border-outline-variant/10 pt-6">
+<div class="text-center">
+<p class="text-xs text-on-surface-variant uppercase tracking-widest font-bold mb-1">Stocks</p>
+<p class="text-lg font-black">€42,100</p>
+</div>
+<div class="text-center">
+<p class="text-xs text-on-surface-variant uppercase tracking-widest font-bold mb-1">Savings</p>
+<p class="text-lg font-black">€38,200</p>
+</div>
+<div class="text-center">
+<p class="text-xs text-on-surface-variant uppercase tracking-widest font-bold mb-1">Crypto</p>
+<p class="text-lg font-black">€3,990</p>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Quick Access & Accounts -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+<!-- Savings Vault Card -->
+<div onclick="location.href=\'savings-detail.html\'" class="md:col-span-2 bg-surface-container-lowest rounded-[1.5rem] p-8 flex flex-col justify-between group cursor-pointer hover:bg-white hover:shadow-xl transition-all duration-300">
+<div class="flex justify-between items-start">
+<div>
+<span class="material-symbols-outlined text-secondary text-4xl mb-4">savings</span>
+<h3 class="text-2xl font-black">European Savings</h3>
+<p class="text-on-surface-variant">4.0% Annual Interest Rate</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+<div class="mt-12">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs uppercase font-bold text-on-surface-variant tracking-widest mb-1">Available Cash</p>
+<p class="text-4xl font-black">€32,401.00</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-[#22c55e]">+€104.22</p>
+<p class="text-xs text-on-surface-variant">Interest this month</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Card: Quick Action -->
+<div class="bg-primary text-on-primary rounded-[1.5rem] p-8 flex flex-col justify-between overflow-hidden relative">
+<div class="relative z-10">
+<h3 class="text-xl font-bold mb-2">Automated Investing</h3>
+<p class="text-on-primary/60 text-sm">Set it and forget it with regular savings plans.</p>
+</div>
+<button class="relative z-10 w-full py-4 bg-white text-primary font-bold rounded-xl mt-8">
+                    Create Plan
+                </button>
+<div class="absolute -right-12 -bottom-12 opacity-10">
+<span class="material-symbols-outlined text-[12rem]" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</div>
+</div>
+</section>
+<!-- Recent Activity: Editorial Layout -->
+<section>
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-3xl font-black tracking-tight">Recent Activity</h2>
+<button class="text-sm font-bold text-secondary flex items-center gap-1">
+                    View Statement <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+<div class="space-y-6">
+<!-- Activity Item -->
+<div class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded-xl transition-colors cursor-pointer">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">add</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Deposit from HSBC</h4>
+<p class="text-on-surface-variant text-sm">Dec 14, 2023 • Recurring Transfer</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-black text-lg text-[#22c55e]">+€2,500.00</p>
+<p class="text-xs font-bold text-[#22c55e]">+€104.22</p>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded-xl transition-colors cursor-pointer">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img alt="Company logo" data-alt="minimalist tech company logo with clean geometric shapes on a white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNKfUgSGv0V4QLda7foCjpzI8qRNrh1hzEvvkqiMtgxwzNgMWWKeafl7BXOuEcAT645a5XzIf8q3XzObO3T3mwWTxot6OnZ4th2iphcA2WN-_cY9pyklKEk24cFhecyT7duc5v04RNjiz6cxcc9thICxtK7KlatI3Da0Nz_CpQQf_EO4TOJrj3oj87z3G7dueN7H3nov8sdnQQuKlNh7axBCgbESlOuTdMPQ6LMmPqlTZPxA_bwmwISkg5FZYbVEwbyeFcGmCxfdNx"/>
+</div>
+<div>
+<h4 class="font-bold text-lg">Apple Inc. (AAPL)</h4>
+<p class="text-on-surface-variant text-sm">Dec 12, 2023 • Dividend Payment</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-black text-lg text-[#22c55e]">+€12.45</p>
+<p class="text-xs font-bold text-[#22c55e]">+€104.22</p>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded-xl transition-colors cursor-pointer">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Tesla (TSLA) Buy</h4>
+<p class="text-on-surface-variant text-sm">Dec 10, 2023 • Market Order</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-black text-lg text-[#ef4444]">-€1,200.00</p>
+<p class="text-xs text-on-surface-variant font-bold">Executed</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Contextual FAB (Only for Main Dashboards) -->
+<button onclick="location.href='deposit.html'" style="cursor:pointer" class="fixed bottom-8 right-8 w-16 h-16 bg-secondary text-on-secondary rounded-

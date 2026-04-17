@@ -1,0 +1,305 @@
+<!-- MrFinance Dashboard (Mono Dark) -->
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MrFinance Dashboard | The Editorial Ledger</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#131313",
+                    "on-tertiary-container": "#000000",
+                    "on-primary-container": "#000000",
+                    "tertiary-fixed-dim": "#005321",
+                    "surface-container-low": "#1b1b1b",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "secondary": "#c7c6c6",
+                    "on-secondary-container": "#e3e2e2",
+                    "on-primary": "#1a1c1c",
+                    "primary-container": "#d4d4d4",
+                    "on-tertiary-fixed-variant": "#6bff8f",
+                    "on-tertiary-fixed": "#ffffff",
+                    "outline-variant": "#474747",
+                    "surface-container-lowest": "#0e0e0e",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary": "#1a1c1c",
+                    "tertiary-container": "#00a74b",
+                    "on-primary-fixed": "#ffffff",
+                    "inverse-surface": "#e2e2e2",
+                    "surface": "#131313",
+                    "tertiary": "#6bff8f",
+                    "secondary-fixed-dim": "#ababab",
+                    "on-surface-variant": "#c6c6c6",
+                    "primary": "#ffffff",
+                    "primary-fixed": "#5d5f5f",
+                    "background": "#000000",
+                    "on-background": "#e2e2e2",
+                    "primary-fixed-dim": "#454747",
+                    "surface-container-high": "#2a2a2a",
+                    "secondary-fixed": "#c7c6c6",
+                    "surface-variant": "#353535",
+                    "secondary-container": "#464747",
+                    "inverse-primary": "#5d5f5f",
+                    "surface-bright": "#393939",
+                    "on-error": "#690005",
+                    "on-secondary-fixed-variant": "#3a3c3c",
+                    "on-surface": "#e2e2e2",
+                    "surface-container-highest": "#353535",
+                    "on-primary-fixed-variant": "#e2e2e2",
+                    "surface-tint": "#c6c6c7",
+                    "error": "#ffb4ab",
+                    "on-tertiary": "#002109",
+                    "outline": "#919191",
+                    "surface-container": "#1f1f1f",
+                    "inverse-on-surface": "#303030",
+                    "tertiary-fixed": "#006e2f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["IBM Plex Sans", "sans-serif"],
+                    "body": ["IBM Plex Sans", "sans-serif"],
+                    "label": ["IBM Plex Sans", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary selection:text-black">
+<!-- SideNavBar Anchor -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-black flex flex-col py-10 px-6 h-full font-['IBM_Plex_Sans'] text-sm tracking-wide z-50">
+<div class="text-xl font-bold text-white mb-8">MrFinance</div>
+<div class="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-8">The Editorial Ledger</div>
+<nav class="flex flex-col gap-2">
+<!-- Active Tab: Portfolio -->
+<a class="flex items-center gap-4 text-white font-bold bg-zinc-900 rounded-sm px-4 py-3 transition-all scale-[0.98]" href="portfolio-dark.html">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span>Portfolio</span>
+</a>
+<a class="flex items-center gap-4 text-zinc-500 font-medium px-4 py-3 hover:bg-zinc-900 hover:text-white transition-all" href="account-info-dark.html">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span>Account Info</span>
+</a>
+<a class="flex items-center gap-4 text-zinc-500 font-medium px-4 py-3 hover:bg-zinc-900 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span>Historical</span>
+</a>
+<a class="flex items-center gap-4 text-zinc-500 font-medium px-4 py-3 hover:bg-zinc-900 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span>Explore</span>
+</a>
+</nav>
+<div class="mt-auto pt-8">
+<div class="p-4 bg-zinc-950 border border-zinc-900 rounded-sm">
+<p class="text-[10px] text-zinc-500 uppercase tracking-widest mb-2">Market Status</p>
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+<span class="text-xs font-medium text-white">NYSE OPEN</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen bg-black px-12 py-10">
+<!-- Top Navigation Mockup -->
+<header class="flex justify-between items-center mb-16">
+<div>
+<span class="text-[11px] font-bold uppercase tracking-[0.3em] text-zinc-500 block mb-1">Global Overview</span>
+<h1 class="text-3xl font-black tracking-tighter text-white">Portfolio</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined text-white" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-tertiary rounded-full"></span>
+</div>
+<span class="material-symbols-outlined text-white" data-icon="settings">settings</span>
+<div class="w-8 h-8 rounded-sm bg-zinc-800 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close up studio portrait of a sophisticated man in a black turtleneck with moody lighting and dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQn3Y4UF9kAlC81rL8Lv-skvGtoRnQNUPqA5y7rUIoz9i0b8RfUNCS2KLTzPKZ5lb-MlOdYXZmDYIp2fET3tbCWBzilCasXw6Pq_geSTkRr78V2KRtN0Jssb76RfWWii88ib0XsVd2ohMDK6cLc5cu7NWYddmEJJ3Sz4VR4s22znP9TMGbkoixkLy7HmjWzHCBBqXc0AEBB8zkpLm3Spg7bIGFVKSENV_l24jNuUHPJVL6S6lley9sgsc6V4fu10Qoamy5kzslZEP5"/>
+<a href="portfolio.html" title="Switch to light theme" style="cursor:pointer;margin-left:8px" class="text-xs font-bold border border-zinc-700 rounded-lg px-3 py-1 text-zinc-400 hover:text-white transition-colors">☀️ Light</a>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="editorial-grid">
+<!-- Primary Wealth Display -->
+<section class="col-span-8 bg-black">
+<div class="mb-12">
+<label class="text-[11px] font-bold uppercase tracking-[0.4em] text-zinc-500 block mb-4">Total Net Worth</label>
+<div class="flex items-baseline gap-4">
+<span class="text-7xl font-bold tracking-tighter text-white">€84,290.42</span>
+<span class="text-xl font-medium text-tertiary">+12.4% <span class="text-sm font-normal text-zinc-500 ml-1">YTD</span></span>
+</div>
+</div>
+<!-- Main Performance Graph -->
+<div class="relative h-[320px] w-full mt-8 group">
+<svg class="w-full h-full" viewbox="0 0 800 300">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#6bff8f" stop-opacity="0.15"></stop>
+<stop offset="100%" stop-color="#6bff8f" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,250 Q100,230 200,240 T400,180 T600,120 T800,80" fill="none" stroke="#6bff8f" stroke-width="3"></path>
+<path d="M0,250 Q100,230 200,240 T400,180 T600,120 T800,80 V300 H0 Z" fill="url(#chartGradient)"></path>
+<!-- Marker -->
+<circle cx="800" cy="80" fill="#6bff8f" r="5"></circle>
+<circle cx="800" cy="80" fill="#6bff8f" fill-opacity="0.2" r="10"></circle>
+</svg>
+<div class="absolute bottom-0 left-0 w-full flex justify-between text-[10px] text-zinc-600 font-bold tracking-widest pt-4 uppercase">
+<span>JAN</span><span>MAR</span><span>MAY</span><span>JUL</span><span>SEP</span><span>NOV</span>
+</div>
+</div>
+</section>
+<!-- Allocation Sidebar -->
+<section class="col-span-4 space-y-8">
+<div class="bg-surface-container-low p-8 rounded-sm">
+<h3 class="text-sm font-bold uppercase tracking-widest mb-8 text-white">Portfolio Allocation</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-xs mb-2">
+<span class="text-zinc-400">Equity</span>
+<span class="text-white font-bold">64%</span>
+</div>
+<div class="h-1 bg-zinc-800 w-full">
+<div class="h-full bg-white w-[64%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-2">
+<span class="text-zinc-400">Crypto</span>
+<span class="text-white font-bold">22%</span>
+</div>
+<div class="h-1 bg-zinc-800 w-full">
+<div class="h-full bg-tertiary w-[22%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-2">
+<span class="text-zinc-400">Fixed Income</span>
+<span class="text-white font-bold">14%</span>
+</div>
+<div class="h-1 bg-zinc-800 w-full">
+<div class="h-full bg-zinc-600 w-[14%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Explore Promotion -->
+<div class="bg-white p-8 rounded-sm text-black flex flex-col justify-between h-[280px] relative overflow-hidden">
+<div class="relative z-10">
+<label class="text-[10px] font-black uppercase tracking-[0.2em] mb-2 block opacity-60">Elite Access</label>
+<h4 class="text-2xl font-bold tracking-tight leading-none mb-4">Explore Private Equity</h4>
+<p class="text-sm opacity-80 leading-snug max-w-[200px]">Unlock exclusive deal flow in emerging tech startups and pre-IPO ventures.</p>
+</div>
+<button class="relative z-10 w-full bg-black text-white text-[11px] font-bold uppercase tracking-widest py-4 transition-transform active:scale-95">Get Access</button>
+<!-- Abstract graphic elements -->
+<div class="absolute -right-12 -bottom-12 w-48 h-48 bg-zinc-200 rounded-full blur-3xl opacity-50"></div>
+</div>
+</section>
+<!-- Active Assets Table -->
+<section class="col-span-12 mt-12">
+<div class="flex justify-between items-end mb-8">
+<h2 class="text-xl font-bold text-white tracking-tight">Active Assets</h2>
+<a class="text-[10px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors" href="#">View All Positions</a>
+</div>
+<div class="w-full overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="text-[10px] uppercase tracking-widest text-zinc-500 text-left border-b border-zinc-900">
+<th class="pb-4 font-bold">Asset</th>
+<th class="pb-4 font-bold">Ticker</th>
+<th class="pb-4 font-bold">Value</th>
+<th class="pb-4 font-bold">Price</th>
+<th class="pb-4 font-bold">Change (24h)</th>
+<th class="pb-4 font-bold text-right">Yield</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-zinc-900/30">
+<!-- Row 1 -->
+<tr class="group hover:bg-zinc-900/30 transition-colors">
+<td class="py-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-zinc-800 rounded-sm flex items-center justify-center font-bold text-xs">A</div>
+<span class="text-sm font-bold text-white">Apple Inc.</span>
+</div>
+</td>
+<td class="py-6"><span class="px-2 py-1 bg-zinc-900 text-[10px] font-bold text-zinc-400 rounded-sm">AAPL</span></td>
+<td class="py-6 text-sm font-medium">€14,203.11</td>
+<td class="py-6 text-sm text-zinc-400">€189.22</td>
+<td class="py-6 text-sm font-bold text-tertiary">+1.24%</td>
+<td class="py-6 text-sm text-right text-zinc-500">0.45%</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-zinc-900/30 transition-colors">
+<td class="py-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-zinc-800 rounded-sm flex items-center justify-center font-bold text-xs">B</div>
+<span class="text-sm font-bold text-white">Bitcoin</span>
+</div>
+</td>
+<td class="py-6"><span class="px-2 py-1 bg-zinc-900 text-[10px] font-bold text-zinc-400 rounded-sm">BTC</span></td>
+<td class="py-6 text-sm font-medium">€28,500.00</td>
+<td class="py-6 text-sm text-zinc-400">€64,210.00</td>
+<td class="py-6 text-sm font-bold text-tertiary">+4.82%</td>
+<td class="py-6 text-sm text-right text-zinc-500">—</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-zinc-900/30 transition-colors">
+<td class="py-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-zinc-800 rounded-sm flex items-center justify-center font-bold text-xs">N</div>
+<span class="text-sm font-bold text-white">NVIDIA Corp.</span>
+</div>
+</td>
+<td class="py-6"><span class="px-2 py-1 bg-zinc-900 text-[10px] font-bold text-zinc-400 rounded-sm">NVDA</span></td>
+<td class="py-6 text-sm font-medium">€9,822.45</td>
+<td class="py-6 text-sm text-zinc-400">€824.11</td>
+<td class="py-6 text-sm font-bold text-error">-0.84%</td>
+<td class="py-6 text-sm text-right text-zinc-500">0.02%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Footer Editorial Metadata -->
+<footer class="mt-32 pt-12 border-t border-zinc-900 flex justify-between items-center text-[10px] text-zinc-600 font-bold uppercase tracking-[0.2em]">
+<div class="flex gap-8">
+<span>© 2024 MrFinance Editorial</span>
+<span>Privacy / Terms</span>
+<span>Institutional Grade Data</span>
+</div>
+<div class="flex items-center gap-2">
+<sp

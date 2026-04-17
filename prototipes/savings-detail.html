@@ -1,0 +1,306 @@
+<!-- MrFinance Account Details -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MrFinance - Savings Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#313030",
+                        "secondary-fixed": "#dae1ff",
+                        "on-secondary-fixed-variant": "#003fa4",
+                        "on-surface-variant": "#4c4546",
+                        "surface-dim": "#dcd9d9",
+                        "primary": "#000000",
+                        "surface-container": "#f0edec",
+                        "background": "#fcf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ebe7e7",
+                        "primary-fixed": "#e2e2e2",
+                        "outline": "#7e7576",
+                        "inverse-primary": "#c6c6c6",
+                        "secondary": "#0050cc",
+                        "on-primary-container": "#848484",
+                        "on-tertiary-fixed": "#002111",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#b3c5ff",
+                        "surface": "#fcf9f8",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary": "#000000",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary-container": "#00975e",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "on-primary-fixed": "#1b1b1b",
+                        "surface-tint": "#5e5e5e",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fcf9f8",
+                        "tertiary-fixed-dim": "#31e193",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#005231",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#002111",
+                        "tertiary-fixed": "#59fead",
+                        "on-secondary-container": "#f9f7ff",
+                        "surface-variant": "#e5e2e1",
+                        "secondary-container": "#0266ff",
+                        "on-secondary-fixed": "#001849",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#cfc4c5",
+                        "primary-container": "#1b1b1b",
+                        "on-surface": "#1c1b1b",
+                        "on-primary-fixed-variant": "#474747"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#fcf9f8] dark:bg-stone-950 opacity-80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black text-black dark:text-white uppercase tracking-tighter font-['Inter']">MrFinance</span>
+<nav class="hidden md:flex gap-6"><a class="text-[#4c4546] dark:text-stone-400 font-medium hover:text-black transition-colors duration-200" href="portfolio.html">Portfolio</a><a class="text-black dark:text-white font-bold border-b-2 border-black dark:border-white" href="account-info.html">Account Info</a><a href="#">Historical</a><a href="#">Explore</a></nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface">help</span>
+</button>
+<a href="savings-detail-dark.html" title="Switch theme" class="p-2 text-on-surface-variant hover:text-primary transition-colors font-bold text-xs border border-outline-variant rounded-lg px-3 py-1">🌙 Dark</a>
+<div class="w-8 h-8 rounded-full overflow-hidden ml-2 bg-surface-container-highest">
+<img alt="User profile avatar" data-alt="professional corporate headshot of a smiling executive with neutral studio background and soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpLmoR18tV0o9zw1S9N3o4zAWKRnQkBXpszH-l6z3hSAHG0BQ3mt00No2FE1UENp8_It-_0kjZnK89BA0dm5gcL1wkVZG0lFvWeZ_yYe25KV3-2ZTOAkNDGXiLv4fo2S17IAp0enfYEneSgF0NRY3LsjNwtvcMfwGVVXWkYrsJYbAm4Dnu2O1Cjs_5JTEd7BpCUUCD9ACtWKfWshQq_2yt52RIl6o77EtC8QzYtH0kaMxet0TR1X5vJRs2zcIas39j8zVViD8sENyi"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNav (Desktop) -->
+<aside class="hidden md:flex flex-col h-screen fixed left-0 top-0 p-6 space-y-8 bg-[#f6f3f2] dark:bg-stone-900 w-64 pt-24 z-40">
+<div class="px-4">
+<p class="text-2xl font-black text-black dark:text-white">MrFinance</p>
+<p class="text-xs text-on-surface-variant font-medium">Premium Curator</p>
+</div>
+<nav class="space-y-2"><a class="flex items-center gap-3 text-[#4c4546] dark:text-stone-400 px-4 py-3 hover:bg-[#e5e2e1] transition-all duration-200 font-['Inter'] text-sm font-medium" href="portfolio.html"><span class="material-symbols-outlined">account_balance_wallet</span>Portfolio</a><a class="flex items-center gap-3 bg-[#ffffff] dark:bg-stone-800 text-black dark:text-white rounded-xl px-4 py-3 shadow-sm font-['Inter'] text-sm font-medium translate-x-1 transition-transform" href="account-info.html"><span class="material-symbols-outlined">person</span>Account Info</a><a class="flex items-center gap-3 text-[#4c4546] dark:text-stone-400 px-4 py-3 hover:bg-[#e5e2e1] transition-all duration-200 font-['Inter'] text-sm font-medium" href="#"><span class="material-symbols-outlined">history</span>Historical</a><a class="flex items-center gap-3 text-[#4c4546] dark:text-stone-400 px-4 py-3 hover:bg-[#e5e2e1] transition-all duration-200 font-['Inter'] text-sm font-medium" href="#"><span class="material-symbols-outlined">explore</span>Explore</a></nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-24 px-8 pb-12 max-w-7xl">
+<!-- Breadcrumb / Back Navigation -->
+<nav class="mb-10 flex items-center gap-2">
+<button class="flex items-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[1.2rem]">chevron_left</span>
+<span class="text-sm font-medium">Back to Accounts</span>
+</button>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<!-- Left Column: Account Summary -->
+<div class="lg:col-span-8 space-y-14">
+<!-- Account Header & Balance -->
+<section>
+<div class="flex items-end justify-between mb-8">
+<div>
+<span class="bg-secondary/10 text-secondary text-[0.6875rem] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Premium Savings</span>
+<h1 class="text-3xl font-bold tracking-tight text-on-surface">Wealth-Builder Account</h1>
+<p class="text-on-surface-variant text-sm mt-1">Account ending in •••• 8829</p>
+</div>
+<div class="text-right">
+<span class="text-on-surface-variant text-xs font-semibold uppercase tracking-widest block mb-1">Available Balance</span>
+<h2 class="text-6xl font-bold tracking-tighter text-on-surface">$142,550.82</h2>
+</div>
+</div>
+<!-- Interest Bento Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+<div class="bg-surface-container-low p-6 rounded-xl space-y-4">
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+<div>
+<p class="text-on-surface-variant text-[0.75rem] font-bold uppercase tracking-widest">Annual Yield (APY)</p>
+<p class="text-2xl font-bold text-on-surface mt-1">4.25%</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl space-y-4">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">payments</span>
+<div>
+<p class="text-on-surface-variant text-[0.75rem] font-bold uppercase tracking-widest">Interest This Month</p>
+<p class="text-2xl font-bold text-on-surface mt-1">$482.11</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl space-y-4">
+<span class="material-symbols-outlined text-outline">calendar_today</span>
+<div>
+<p class="text-on-surface-variant text-[0.75rem] font-bold uppercase tracking-widest">Next Payout</p>
+<p class="text-2xl font-bold text-on-surface mt-1">Oct 31</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Action Buttons (Mobile/Contextual) -->
+<div class="flex gap-4">
+<button class="flex-1 md:flex-none px-10 py-4 bg-primary text-on-primary rounded-xl font-bold hover:opacity-90 transition-all active:scale-95 duration-100 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[1.2rem]">add</span>
+                        Deposit
+                    </button>
+<button class="flex-1 md:flex-none px-10 py-4 bg-surface-container-highest text-on-surface rounded-xl font-bold hover:bg-surface-container-high transition-all active:scale-95 duration-100 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[1.2rem]">remove</span>
+                        Withdraw
+                    </button>
+</div>
+<!-- Transaction List -->
+<section>
+<div class="flex justify-between items-center mb-10">
+<h3 class="text-xl font-bold tracking-tight">Recent Activity</h3>
+<div class="flex gap-4">
+<button class="text-sm font-bold text-secondary">Download CSV</button>
+<button class="text-sm font-bold text-on-surface-variant">Filter</button>
+</div>
+</div>
+<div class="space-y-6">
+<!-- Transaction Day Group -->
+<div class="space-y-4">
+<p class="text-[0.6875rem] font-black uppercase tracking-[0.2em] text-on-surface-variant/60">Today, Oct 14</p>
+<!-- Transaction Row -->
+<div class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed-dim/10 flex items-center justify-center text-tertiary-fixed-dim">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Interest Payment (Sept 2023)</p>
+<p class="text-xs text-on-surface-variant">WealthWise Growth Fund</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-[#22c55e]">+$482.11</p>
+<p class="text-xs text-on-surface-variant">Completed</p>
+</div>
+</div>
+<!-- Transaction Row -->
+<div class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined">south_west</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Deposit from External Account</p>
+<p class="text-xs text-on-surface-variant">Chase Checking •••• 1202</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-on-surface">+$5,000.00</p>
+<p class="text-xs text-on-surface-variant">Processing</p>
+</div>
+</div>
+</div>
+<!-- Transaction Day Group -->
+<div class="space-y-4 pt-4">
+<p class="text-[0.6875rem] font-black uppercase tracking-[0.2em] text-on-surface-variant/60">Oct 02, 2023</p>
+<div class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined">north_east</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Transfer to Trading Wallet</p>
+<p class="text-xs text-on-surface-variant">Internal Transfer</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-[#ef4444]">-$1,250.00</p>
+<p class="text-xs text-on-surface-variant">Completed</p>
+</div>
+</div>
+<div class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined">south_west</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Deposit from Payroll</p>
+<p class="text-xs text-on-surface-variant">Stripe Inc. Payout</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-on-surface">+$8,400.00</p>
+<p class="text-xs text-on-surface-variant">Completed</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Editorial Details -->
+<div class="lg:col-span-4 space-y-10">
+<!-- Wealth Growth Card -->
+<div class="bg-primary text-on-primary p-8 rounded-2xl relative overflow-hidden">
+<div class="relative z-10 space-y-6">
+<h4 class="text-xl font-bold leading-tight">Your wealth has grown 12.4% this year.</h4>
+<p class="text-on-primary/70 text-sm leading-relaxed">By maintaining your current deposit frequency, you're on track to reach your $200k milestone by June.</p>
+<button class="w-full py-3 bg-on-primary text-primary rounded-xl font-bold text-sm">Update Goals</button>
+</div>
+<!-- Decorative background texture -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+</div>
+<!-- Account Performance Stats -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl space-y-8 shadow-sm">
+<h5 class="text-[0.75rem] font-black uppercase tracking-widest text-on-surface-variant">Insights</h5>
+<div class="space-y-6">
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Avg. Monthly Deposit</span>
+<span class="font-bold">$4,250</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Interest Earned YTD</span>
+<span class="font-bold text-[#22c55e]">$3,842.19</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Withdrawal Limit</span>
+<span class="font-bold">Unlimited</span>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                            Rates are variable and subject to change. FDIC insured up to $250,000 through our partner bank network.
+                        </p>
+</div>
+</div>
+<!-- Curator Prompt Card -->
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden group cursor-pointer">
+<img alt="Investment Opportunity" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="minimalist aesthetic photo of a luxury glass of water and professional notebook on a clean white desk with morning shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBf71x68gs439nbde3rARMGkCOuwNAdsnBfKkPlW0Eo8oXQXDfaL84jUbVhCG1jtiatP351fe8c4ZxXe3PrLO8Wbl2NYqf5rPYrT3LFBrrvv4lJlmsX23c7Y3NRbZYeSPqaqUjs6e6dKcXX3KV1ZxZNSLM1GZvCaNWWMxYE6vzT0VuLBzlz-vsYeQcjVfN3LfthS2gZidJftBbT9eZq7zOlxJDsf4pQ3EXG1JHvvxnIB-YK3RbQToAnXA7UBnphZvYFKo8omngcxkV"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8">
+<span class="text-white/60 text-[0.6rem] font-bold uppercase tracking-[0.3em] mb-2">Curated for you</span>
+<h4 class="text-white text-lg font-bold">The Gold-Backed Portfolio Diversification</h4>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full bg-[#fcf9f8] dark:bg-stone-950 opacity-95 backdrop-blur-xl border-t border-outline-variant/10 px-6 py-3 flex justify-between items-center z-50"><a class="flex flex-col items-center gap-1 text-on-surface-variant" href="portfolio.html"><span class="material-symbols-outlined">account_balance_wallet</span><span class="text-[0.65rem] font-bold">Portfolio</span></a><a class="flex flex-col items-center gap-1 text-black" href="account-info.html"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span><span class="text-[0.65rem] font-bold">Account Info</span></a><div class="relative -top-6"><button class="w-14 h-14 bg-primary text-on-primary rounded-2xl shadow-xl flex items-center justify-center active:scale-90 transition-transform"><span class="material-symbols-outlined">add</span></button></div><a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#"><span class="material-symbols-outlined">history</span><span class="text-[0.65rem] font-bold">Historical</span></a><a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#"><span class="material-symbols-outlined">explore</span><span class="text-[0.65rem] font-bold">Explore</span></a></nav>
+</body></html>

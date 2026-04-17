@@ -1,0 +1,308 @@
+<!-- MrFinance Account Details (Mono Dark) -->
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Account Details | MrFinance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#131313",
+                    "on-tertiary-container": "#000000",
+                    "on-primary-container": "#000000",
+                    "tertiary-fixed-dim": "#005321",
+                    "surface-container-low": "#1b1b1b",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "secondary": "#c7c6c6",
+                    "on-secondary-container": "#e3e2e2",
+                    "on-primary": "#1a1c1c",
+                    "primary-container": "#d4d4d4",
+                    "on-tertiary-fixed-variant": "#6bff8f",
+                    "on-tertiary-fixed": "#ffffff",
+                    "outline-variant": "#474747",
+                    "surface-container-lowest": "#0e0e0e",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary": "#1a1c1c",
+                    "tertiary-container": "#00a74b",
+                    "on-primary-fixed": "#ffffff",
+                    "inverse-surface": "#e2e2e2",
+                    "surface": "#131313",
+                    "tertiary": "#6bff8f",
+                    "secondary-fixed-dim": "#ababab",
+                    "on-surface-variant": "#c6c6c6",
+                    "primary": "#ffffff",
+                    "primary-fixed": "#5d5f5f",
+                    "background": "#131313",
+                    "on-background": "#e2e2e2",
+                    "primary-fixed-dim": "#454747",
+                    "surface-container-high": "#2a2a2a",
+                    "secondary-fixed": "#c7c6c6",
+                    "surface-variant": "#353535",
+                    "secondary-container": "#464747",
+                    "inverse-primary": "#5d5f5f",
+                    "surface-bright": "#393939",
+                    "on-error": "#690005",
+                    "on-secondary-fixed-variant": "#3a3c3c",
+                    "on-surface": "#e2e2e2",
+                    "surface-container-highest": "#353535",
+                    "on-primary-fixed-variant": "#e2e2e2",
+                    "surface-tint": "#c6c6c7",
+                    "error": "#ffb4ab",
+                    "on-tertiary": "#002109",
+                    "outline": "#919191",
+                    "surface-container": "#1f1f1f",
+                    "inverse-on-surface": "#303030",
+                    "tertiary-fixed": "#006e2f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #000000;
+            color: #e2e2e2;
+            font-family: 'Inter', sans-serif;
+        }
+        .editorial-shadow {
+            box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.03);
+        }
+    </style>
+</head>
+<body class="bg-black">
+<!-- SideNavBar Anchor -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-black flex flex-col py-10 px-6 font-['IBM_Plex_Sans'] text-sm tracking-wide z-50">
+<div class="text-xl font-bold text-white mb-2 uppercase tracking-widest">MrFinance</div>
+<div class="text-[0.6rem] text-zinc-500 font-bold uppercase tracking-[0.2em] mb-12">The Editorial Ledger</div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-4 text-white font-bold bg-zinc-900 rounded-sm px-4 py-3 scale-[0.98]" href="portfolio-dark.html">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span>Portfolio</span>
+</a>
+<a class="flex items-center gap-4 text-zinc-500 font-medium px-4 py-3 hover:bg-zinc-900 hover:text-white transition-all" href="account-info-dark.html">
+<span class="material-symbols-outlined">person</span>
+<span>Account Info</span>
+</a>
+<a class="flex items-center gap-4 text-zinc-500 font-medium px-4 py-3 hover:bg-zinc-900 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">history</span>
+<span>Historical</span>
+</a>
+<a class="flex items-center gap-4 text-zinc-500 font-medium px-4 py-3 hover:bg-zinc-900 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span>Explore</span>
+</a>
+</div>
+<div class="mt-auto pt-10">
+<div class="flex items-center gap-3 px-4 py-3 bg-zinc-950 rounded-sm">
+<div class="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs">settings</span>
+</div>
+<div>
+<div class="text-xs font-bold text-white">Settings</div>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar Anchor -->
+<header class="flex justify-between items-center px-12 w-full h-16 bg-black font-['IBM_Plex_Sans'] antialiased">
+<div class="flex items-center gap-8">
+<div class="text-2xl font-black tracking-tighter text-white">Account Details</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 bg-zinc-900 px-4 py-1.5 rounded-sm">
+<span class="material-symbols-outlined text-sm text-zinc-500">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-zinc-300 w-48 p-0" placeholder="Search markets..." type="text"/>
+</div>
+<div class="flex gap-4 text-white">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-80">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:opacity-80">settings</span>
+</div>
+<img alt="User profile" class="w-8 h-8 rounded-full object-cover" data-alt="Close-up professional portrait of a man in dark attire, moody studio lighting with high contrast shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBplsymW_zbNaxznzxFm5TYN5vAseICuG8CGiJcvw8uF18VBDEyQ9-sDqdLsTR_PR2A3CpxXKyIXwKDHV97CRhfQ9V2v1RaUXFxX8u6CHd-0yFUJDX15Cm2mpXtJOuYrdHFYRTflbnPiKzKy95QNGo2kBMUyy25VKAWtem8V9cqxkozt5lBaH_pTx_ZMXPOpptVXK23wCm0J548_qX42XNJ8RdvII020xMcv2giCl2C72O39af3oVQcv_KW45YfTNyLuZqyRRg-iFJu"/>
+</div>
+</header>
+<div class="px-12 py-10 max-w-7xl">
+<!-- Hero Balance Section -->
+<section class="mb-16">
+<label class="text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-zinc-500 mb-4 block">Total Portfolio Value</label>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+<div>
+<h1 class="text-[4rem] font-extrabold text-white leading-none tracking-tighter">$142,550.82</h1>
+<div class="flex items-center gap-2 mt-4 text-tertiary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<span class="text-sm font-bold">+12.4% vs last month</span>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="bg-primary text-on-primary px-10 py-4 font-bold rounded-lg text-sm transition-all hover:opacity-90 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                            Deposit
+                        </button>
+<button class="bg-surface-container-high text-white px-10 py-4 font-bold rounded-lg text-sm transition-all hover:bg-surface-bright flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">remove</span>
+                            Withdraw
+                        </button>
+</div>
+</div>
+</section>
+<!-- KPI Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+<div class="bg-surface-container-low p-8 rounded-lg border-l border-tertiary/20">
+<div class="flex justify-between items-start mb-6">
+<label class="text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-zinc-400">Annual Yield</label>
+<span class="material-symbols-outlined text-tertiary">percent</span>
+</div>
+<div class="text-4xl font-bold text-tertiary tracking-tight">4.25%</div>
+<div class="mt-4 h-1 bg-zinc-800 w-full overflow-hidden">
+<div class="h-full bg-tertiary w-3/4"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 rounded-lg">
+<div class="flex justify-between items-start mb-6">
+<label class="text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-zinc-400">Interest this Month</label>
+<span class="material-symbols-outlined text-tertiary">monetization_on</span>
+</div>
+<div class="text-4xl font-bold text-tertiary tracking-tight">$482.11</div>
+<div class="text-[0.6875rem] text-zinc-500 mt-4">Accrued daily since Oct 01</div>
+</div>
+<div class="bg-surface-container-low p-8 rounded-lg">
+<div class="flex justify-between items-start mb-6">
+<label class="text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-zinc-400">Next Payout</label>
+<span class="material-symbols-outlined text-white">calendar_today</span>
+</div>
+<div class="text-4xl font-bold text-white tracking-tight">Oct 31</div>
+<div class="text-[0.6875rem] text-zinc-500 mt-4">Scheduled deposit at 23:59 EST</div>
+</div>
+</section>
+<!-- Main Content & Sidebar -->
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Recent Activity -->
+<div class="flex-grow">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-xl font-bold text-white">Recent Activity</h2>
+<button class="text-[0.6875rem] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors">Download CSV</button>
+</div>
+<div class="space-y-2">
+<!-- Transaction Item -->
+<div class="group flex items-center justify-between py-6 px-4 hover:bg-surface-container-low transition-colors rounded-sm">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 bg-zinc-900 rounded-sm flex items-center justify-center group-hover:bg-zinc-800 transition-colors">
+<span class="material-symbols-outlined text-tertiary">south_west</span>
+</div>
+<div>
+<div class="text-sm font-bold text-white mb-1">Monthly Interest Credit</div>
+<div class="text-xs text-zinc-500">Oct 01, 2023 • System Distribution</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-sm font-bold text-tertiary">+$482.11</div>
+<div class="text-[0.6875rem] text-zinc-500 uppercase tracking-tighter">Settled</div>
+</div>
+</div>
+<div class="group flex items-center justify-between py-6 px-4 hover:bg-surface-container-low transition-colors rounded-sm">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 bg-zinc-900 rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-error">north_east</span>
+</div>
+<div>
+<div class="text-sm font-bold text-white mb-1">Transfer to External Card</div>
+<div class="text-xs text-zinc-500">Sep 28, 2023 • VISA ****4291</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-sm font-bold text-error">-$1,200.00</div>
+<div class="text-[0.6875rem] text-zinc-500 uppercase tracking-tighter">Processing</div>
+</div>
+</div>
+<div class="group flex items-center justify-between py-6 px-4 hover:bg-surface-container-low transition-colors rounded-sm">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 bg-zinc-900 rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">add_box</span>
+</div>
+<div>
+<div class="text-sm font-bold text-white mb-1">Direct Deposit</div>
+<div class="text-xs text-zinc-500">Sep 25, 2023 • Employer Payroll</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-sm font-bold text-tertiary">+$4,500.00</div>
+<div class="text-[0.6875rem] text-zinc-500 uppercase tracking-tighter">Settled</div>
+</div>
+</div>
+<div class="group flex items-center justify-between py-6 px-4 hover:bg-surface-container-low transition-colors rounded-sm">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 bg-zinc-900 rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-error">shopping_cart</span>
+</div>
+<div>
+<div class="text-sm font-bold text-white mb-1">Withdrawal at ATM</div>
+<div class="text-xs text-zinc-500">Sep 22, 2023 • Main St Branch</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-sm font-bold text-error">-$200.00</div>
+<div class="text-[0.6875rem] text-zinc-500 uppercase tracking-tighter">Settled</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar column -->
+<aside class="w-full lg:w-80 space-y-8">
+<!-- Insights Section -->
+<div>
+<h3 class="text-sm font-bold text-white mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">lightbulb</span>
+                            Insights
+                        </h3>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-5 rounded-lg border border-zinc-800">
+<div class="text-xs font-bold text-white mb-2 leading-relaxed">Your cash position is 15% higher than average.</div>
+<p class="text-xs text-zinc-500 leading-relaxed">Consider reallocating $15,000 into high-yield fixed assets to optimize your ROI.</p>
+<a class="inline-block mt-4 text-[0.6875rem] font-bold text-tertiary underline uppercase tracking-widest" href="#">Learn more</a>
+</div>
+<div class="bg-surface-container-low p-5 rounded-lg">
+<div class="text-xs font-bold text-white mb-2 leading-relaxed">Volatility Alert</div>
+<p class="text-xs text-zinc-500 leading-relaxed">Market trends suggest a potential 2% dip in treasury yields. Lock in current rates now.</p>
+</div>
+</div>
+</div>
+<!-- Automated Investing Promotion -->
+<div class="relative overflow-hidden bg-white p-8 rounded-lg">
+<div class="relative z-10">
+<div class="text-xs font-bold text-black uppercase tracking-widest mb-4">Pro Feature</div>
+<h4 class="text-xl font-black text-black leading-tight mb-4">Automated Investing</h4>
+<p class="text-sm text-zinc-700 leading-relaxed mb-8">Let our AI-driven ledger manage your risk parity while you sleep.</p>
+<button class="w-full py-3 bg-black text-white font-bold text-xs uppercase tracking-[0.2em] rounded-sm transition-transform active:scale-95">Enable Now</button>
+</div>
+<!-- Abstract design element for editorial feel -->
+<div class="absolute -bottom-8 -right-8 w-32 h-32 bg-zinc-200 rounded-full blur-3xl opacity-50"></div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,285 @@
+<!-- MrFinance Account Info -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Account Info - MrFinance</title>
+<!-- Google Fonts: Ibm Plex Sans & Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#f0edec",
+                    "secondary": "#0050cc",
+                    "on-secondary-container": "#f9f7ff",
+                    "tertiary": "#000000",
+                    "surface-tint": "#5e5e5e",
+                    "outline-variant": "#cfc4c5",
+                    "on-surface": "#1c1b1b",
+                    "surface-container-highest": "#e5e2e1",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#1b1b1b",
+                    "tertiary-fixed": "#59fead",
+                    "surface": "#fcf9f8",
+                    "secondary-fixed": "#dae1ff",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-tertiary-fixed": "#002111",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#000000",
+                    "on-surface-variant": "#4c4546",
+                    "on-secondary-fixed-variant": "#003fa4",
+                    "on-tertiary-container": "#00975e",
+                    "surface-container-low": "#f6f3f2",
+                    "secondary-fixed-dim": "#b3c5ff",
+                    "surface-variant": "#e5e2e1",
+                    "on-secondary-fixed": "#001849",
+                    "on-background": "#1c1b1b",
+                    "inverse-primary": "#c6c6c6",
+                    "secondary-container": "#0266ff",
+                    "inverse-surface": "#313030",
+                    "on-primary-fixed-variant": "#474747",
+                    "primary-fixed-dim": "#c6c6c6",
+                    "primary-container": "#1b1b1b",
+                    "surface-dim": "#dcd9d9",
+                    "tertiary-fixed-dim": "#31e193",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#005231",
+                    "surface-container-high": "#ebe7e7",
+                    "tertiary-container": "#002111",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#e2e2e2",
+                    "surface-bright": "#fcf9f8",
+                    "background": "#fcf9f8",
+                    "outline": "#7e7576",
+                    "on-primary-container": "#848484",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Roboto-Black"],
+                    "body": ["Roboto"],
+                    "label": ["Roboto"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'IBM Plex Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#fcf9f8] dark:bg-stone-950 opacity-80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black text-black dark:text-white uppercase tracking-tighter font-['Inter']">MrFinance</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-6">
+<button class="text-[#4c4546] dark:text-stone-400 font-medium hover:text-black dark:hover:text-white transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-[#4c4546] dark:text-stone-400 font-medium hover:text-black dark:hover:text-white transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+</div>
+<a href="account-info-dark.html" title="Switch theme" class="p-2 text-on-surface-variant hover:text-primary transition-colors font-bold text-xs border border-outline-variant rounded-lg px-3 py-1">🌙 Dark</a>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="close-up portrait of a professional man with a friendly expression in a bright modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsMtcNIZhobhCGO98MgI6xweT47Rr3tn3Uk7PvtVdch16oflYzvAnQPXjJJtOE-5z8-E3nOjWe4jp5PzP9s2QGQ0jt3ySigAhyD6P71HFzJaciqYtMKXT9b_g6iMxhVV-TCiL0uN6TQcitk_ExStzzuP9EfyEOzF-Nn-ZOchWqFMrOEruBish7TD3W7ZFR4J28k-pHO6j_BkjeD6-yGPaHq-FOc-iShkcgIt1mwVE5YXH1oXOJvmymeRDtlobX5lvq69klyyVM-qC-"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen fixed left-0 top-0 p-6 space-y-8 bg-[#f6f3f2] dark:bg-stone-900 w-64 z-40 pt-24">
+<div class="mb-4">
+<h2 class="text-2xl font-black text-black dark:text-white">Wealth</h2>
+<p class="text-xs text-on-surface-variant font-medium uppercase tracking-widest">Premium Curator</p>
+</div>
+<div class="flex flex-col space-y-1">
+<a class="flex items-center gap-3 text-[#4c4546] dark:text-stone-400 px-4 py-3 hover:bg-[#e5e2e1] dark:hover:bg-stone-800 transition-all duration-200 rounded-xl" href="portfolio.html">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-['Inter'] text-sm font-medium">Portfolio</span>
+</a>
+<!-- Active State: Account Info -->
+<a class="flex items-center gap-3 bg-[#ffffff] dark:bg-stone-800 text-black dark:text-white rounded-xl px-4 py-3 shadow-sm translate-x-1 transition-transform" href="account-info.html">
+<span class="material-symbols-outlined" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span>
+<span class="font-['Inter'] text-sm font-bold">Account Info</span>
+</a>
+<a class="flex items-center gap-3 text-[#4c4546] dark:text-stone-400 px-4 py-3 hover:bg-[#e5e2e1] dark:hover:bg-stone-800 transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Inter'] text-sm font-medium">Historical</span>
+</a>
+<a class="flex items-center gap-3 text-[#4c4546] dark:text-stone-400 px-4 py-3 hover:bg-[#e5e2e1] dark:hover:bg-stone-800 transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-['Inter'] text-sm font-medium">Explore</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="md:ml-64 pt-24 min-h-screen px-6 pb-12">
+<div class="max-w-5xl mx-auto">
+<!-- Hero Header Section (Editorial Layout) -->
+<section class="mt-12 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+<div class="space-y-4">
+<div class="flex items-center gap-6">
+<div class="w-24 h-24 rounded-full overflow-hidden shadow-sm border-4 border-surface-container-lowest">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="high-quality studio portrait of a confident man with subtle lighting and clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9WtzNv64bg3alTN4gcwZNO0KZR9U-L_-00YHg-QpI2FH80jRdZGe8rvIyG5vvXeHOuV_WIyht2MN9mXf94nZFylk0jq454Wa-xj9tTi4EbueyzfSK11Ys5qcevcMyVAqPRwhtutAmUuRLvfiBxtScJ9AG4gbOCI2Rv44xaI0WU_dFjSVSTU31o7DnGgN9Enp6R5cnNZMfJ0euwOeereT6opvqtDAwjoYQZs6bdk6n9HdiJ_pYEOwlqNRHREWkC5JGtbmEY0GImJIJ"/>
+</div>
+<div>
+<h1 class="text-4xl font-bold tracking-tight text-on-surface">Alex Thompson</h1>
+<p class="text-on-surface-variant font-medium">Member since 2021</p>
+</div>
+</div>
+</div>
+<div class="text-right md:text-left bg-surface-container-low p-8 rounded-3xl md:min-w-[320px]">
+<p class="text-xs uppercase tracking-widest text-on-surface-variant font-bold mb-2">Total Account Value</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-black text-primary">€84,290.42</span>
+</div>
+<div class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-surface-container-lowest rounded-full text-tertiary-container text-xs font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+<span>+12.4% this year</span>
+</div>
+</div>
+</section>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Personal Information Section (Editorial Precision) -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-10 rounded-[1.5rem] shadow-[0_40px_40px_rgba(28,27,27,0.04)]">
+<div class="flex items-center justify-between mb-10">
+<h2 class="text-2xl font-bold tracking-tight">Personal Information</h2>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity">
+                            Edit Profile
+                        </button>
+</div>
+<div class="space-y-8">
+<div class="flex flex-col md:flex-row md:items-center border-b border-surface-container pb-6 gap-2 md:gap-0">
+<span class="w-1/3 text-on-surface-variant font-medium text-sm">Full Name</span>
+<span class="flex-grow text-on-surface font-semibold">Alex Thompson</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="flex flex-col md:flex-row md:items-center border-b border-surface-container pb-6 gap-2 md:gap-0">
+<span class="w-1/3 text-on-surface-variant font-medium text-sm">Username</span>
+<span class="flex-grow text-on-surface font-semibold">@alex_finance</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="flex flex-col md:flex-row md:items-center border-b border-surface-container pb-6 gap-2 md:gap-0">
+<span class="w-1/3 text-on-surface-variant font-medium text-sm">Email Address</span>
+<span class="flex-grow text-on-surface font-semibold"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aacbc6cfd284deeacfd2cbc7dac6cf84c9c5c7">[email&#160;protected]</a></span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-0">
+<span class="w-1/3 text-on-surface-variant font-medium text-sm">Date of Creation</span>
+<span class="flex-grow text-on-surface font-semibold">January 12, 2021</span>
+<span class="material-symbols-outlined text-xl text-outline-variant" data-icon="lock">lock</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Security & Linked Accounts -->
+<div class="lg:col-span-5 space-y-8">
+<!-- Linked Accounts -->
+<div class="bg-surface-container-low p-8 rounded-[1.5rem]">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold">Linked Accounts</h3>
+<button class="text-secondary font-bold text-xs">Manage</button>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-xl">
+<div class="w-10 h-10 rounded-lg bg-[#000] flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="account_balance">account_balance</span>
+</div>
+<div class="flex-grow">
+<p class="text-sm font-bold">Main Savings</p>
+<p class="text-xs text-on-surface-variant">HSBC •••• 9210</p>
+</div>
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-xl">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="credit_card">credit_card</span>
+</div>
+<div class="flex-grow">
+<p class="text-sm font-bold">Business Debit</p>
+<p class="text-xs text-on-surface-variant">Visa •••• 4412</p>
+</div>
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Security Pulse -->
+<div class="bg-primary-container p-8 rounded-[1.5rem] text-on-primary">
+<div class="flex items-start justify-between mb-6">
+<div>
+<h3 class="text-lg font-bold text-white">Security Status</h3>
+<p class="text-on-primary-container text-xs mt-1">Last sign-in: Today, 10:42 AM</p>
+</div>
+<div class="p-2 bg-tertiary-fixed-dim rounded-full">
+<span class="material-symbols-outlined text-on-tertiary-fixed" data-icon="shield" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+</div>
+<ul class="space-y-4 text-sm">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-lg" data-icon="done_all">done_all</span>
+<span class="text-white/90">Biometric Login Enabled</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-lg" data-icon="done_all">done_all</span>
+<span class="text-white/90">2-Factor Authentication</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-fixed-dim text-lg" data-icon="sync">sync</span>
+<span class="text-white/90">Recovery key sync active</span>
+</li>
+</ul>
+<button class="w-full mt-8 py-3 bg-white/10 hover:bg-white/20 transition-colors rounded-xl font-bold text-xs border border-white/20">
+                            Update Password
+                        </button>
+</div>
+</div>
+</div>
+<!-- Footer Meta -->
+<footer class="mt-20 border-t border-surface-container py-12 flex flex-col md:flex-row justify-between items-center text-on-surface-variant text-xs gap-4">
+<div class="flex gap-8">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
+<a class="hover:text-primary" href="#">Compliance</a>
+</div>
+<p>© 2024 MrFinance Premium Wealth Curator. All Rights Reserved.</p>
+</footer>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-white dark:bg-stone-900 border-t border-surface-container z-50 flex justify-around items-center py-4 px-2">
+<a href="portfolio.html" class="flex flex-col items-center gap-1 text-on-surface-variant"><span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span><span class="text-[10px] font-bold">Portfolio</span></a>
+<a href="account-info.html" class="flex flex-col items-center gap-1 text-primary"><span class="material-symbols-outlined" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span><span class="text-[10px] font-bold">Account</span></a>
+<a href="#" class="flex flex-col items-center gap-1 text-on-surface-variant"><span class="material-symbols-outlined" data-icon="history">history</span><span class="text-[10px] font-bold">History</span></a>
+<a href="#" class="flex flex-col items-center gap-1 text-on-surface-variant"><span class="material-symbols-outlined" data-icon="explore">explore</span><span class="text-[10px] font-bold">Explore</span></a>
+</nav>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body></html>
