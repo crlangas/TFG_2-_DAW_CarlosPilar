@@ -6,16 +6,18 @@ echo "  Iniciando contenedor Node.js"
 echo "======================================"
 
 # Si no existe package.json, inicializar proyecto
-if [ ! -f /app/package.json ]; then
-  echo ">>> No se encontró package.json. Creando proyecto..."
+if [ ! -f /app/mrfinance ]; then
+  echo ">>> No se encontro el proyecto mrfinance Error"
 
   cd /app
 
   npm init -y
 
-  echo ">>> Instalando dependencias base (express, nodemon)..."
+  echo ">>> Instalando dependencias base (express, nodemon, mysql)..."
   npm install express
   npm install --save-dev nodemon
+  npm install mysql2
+  npm install cors
 
   # Añadir script "dev" al package.json
   node -e "
@@ -30,26 +32,6 @@ if [ ! -f /app/package.json ]; then
   echo ">>> package.json configurado."
 fi
 
-# Si no existe index.js, crear uno de ejemplo
-if [ ! -f /app/index.js ]; then
-  echo ">>> No se encontró index.js. Creando servidor de ejemplo..."
-  cat <<'EOF' > /app/index.js
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.json({ message: '¡Servidor Node.js funcionando!', status: 'ok' });
-});
-
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
-EOF
-  echo ">>> index.js creado."
-fi
 
 # Instalar dependencias si node_modules no existe
 if [ ! -d /app/node_modules ]; then
