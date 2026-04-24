@@ -18,6 +18,8 @@ if [ ! -f /app/mrfinance ]; then
   npm install --save-dev nodemon
   npm install mysql2
   npm install cors
+  npm install bcrypt
+
 
   # Añadir script "dev" al package.json
   node -e "
