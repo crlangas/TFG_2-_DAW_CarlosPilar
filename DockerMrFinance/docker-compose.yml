@@ -19,7 +19,6 @@ services:
       DB_PORT: 3306
       DB_USER: user
       DB_PASSWORD: user
-      DB_NAME: devdb
     depends_on:
       db:
         condition: service_healthy
@@ -33,7 +32,6 @@ services:
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mrfinance
       MYSQL_USER: user
       MYSQL_PASSWORD: user
     volumes:
