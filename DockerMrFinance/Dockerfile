@@ -1,14 +1,17 @@
 FROM node:24-alpine
 
-# Instalar nodemon globalmente para hot-reload
-RUN npm install -g nodemon
+# Build tools needed for native modules (bcrypt requires python3, make, g++)
+RUN apk add --no-cache python3 make g++
+
+# Global tools for dev workflow
+RUN npm install -g nodemon concurrently
 
 WORKDIR /app
 
-# Copiar el entrypoint
+# Copy the entrypoint
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-EXPOSE 3000
+EXPOSE 3000 5173 8081 587 443 80
 
 ENTRYPOINT ["/entrypoint.sh"]

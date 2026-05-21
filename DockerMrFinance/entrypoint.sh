@@ -2,45 +2,40 @@
 set -e
 
 echo "======================================"
-echo "  Iniciando contenedor Node.js"
+echo "  Iniciando contenedor MrFinance"
 echo "======================================"
 
-# Si no existe package.json, inicializar proyecto
-if [ ! -f /app/mrfinance ]; then
-  echo ">>> No se encontro el proyecto mrfinance Error"
+PROJECT_DIR="/app/mrfinance"
 
-  cd /app
-
-  npm init -y
-
-  echo ">>> Instalando dependencias base (express, nodemon, mysql)..."
-  npm install express
-  npm install --save-dev nodemon
-  npm install mysql2
-  npm install cors
-  npm install bcrypt
-
-
-  # Añadir script "dev" al package.json
-  node -e "
-    const fs = require('fs');
-    const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-    pkg.scripts = pkg.scripts || {};
-    pkg.scripts.dev = 'nodemon index.js';
-    pkg.main = 'index.js';
-    fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
-  "
-
-  echo ">>> package.json configurado."
+# Verificar que el proyecto existe
+if [ ! -d "$PROJECT_DIR" ]; then
+  echo ">>> ERROR: No se encontro el proyecto en $PROJECT_DIR"
+  exit 1
 fi
 
+# ── Instalar dependencias del servidor ──────────────────────────────────────
+echo ">>> Instalando dependencias del servidor..."
+cd "$PROJECT_DIR/server"
+npm install
 
-# Instalar dependencias si node_modules no existe
-if [ ! -d /app/node_modules ]; then
-  echo ">>> Instalando dependencias del proyecto..."
-  cd /app && npm install
-fi
+# Dependencias que el codigo del servidor importa pero no estan en su package.json
+echo ">>> Instalando dependencias adicionales del servidor (bcrypt, dotenv, nodemailer)..."
+npm install bcrypt dotenv nodemailer
+npm install multer path
 
-echo ">>> Arrancando servidor con nodemon..."
-cd /app
-exec nodemon index.js
+# ── Instalar dependencias del cliente ───────────────────────────────────────
+echo ">>> Instalando dependencias del cliente..."
+cd "$PROJECT_DIR/client"
+npm install
+
+# ── Arrancar servidor y cliente ─────────────────────────────────────────────
+echo "======================================"
+echo "  MrFinance listo"
+echo "  Client (Vite):  http://localhost:5173"
+echo "  Server (API):   http://localhost:8081"
+echo "======================================"
+
+cd "$PROJECT_DIR"
+exec concurrently -n SERVER,CLIENT -c blue,green \
+  "cd $PROJECT_DIR/server && npx nodemon server.js" \
+  "cd $PROJECT_DIR/client && npx vite --host --port 5173"
