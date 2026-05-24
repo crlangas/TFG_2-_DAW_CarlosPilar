@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MR FINANCE — Documentación de Proyecto DAW</title>
+  <style>
+
+  /* CONFIGURACIÓN GENERAL PROFESIONAL */
+  :root {
+    --primary-color: #1a365d;
+    --secondary-color: #2b6cb0;
+    --text-color: #2d3748;
+    --light-bg: #f7fafc;
+    --border-color: #e2e8f0;
+    --accent-color: #3182ce;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #f7fafc;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Contenedor principal para visualización en pantalla */
+  .document-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 50px 70px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+  }
+
+  /* Encabezados */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    page-break-after: avoid;
+  }
+
+  h1 {
+    font-size: 24pt;
+    border-bottom: 3px solid var(--secondary-color);
+    padding-bottom: 8px;
+    margin-top: 0;
+  }
+
+  h2 {
+    font-size: 18pt;
+    border-bottom: 1.5px solid var(--border-color);
+    padding-bottom: 6px;
+    margin-top: 40px;
+  }
+
+  h3 {
+    font-size: 14pt;
+    color: var(--secondary-color);
+  }
+
+  p, li {
+    text-align: justify;
+  }
+
+  /* Listas */
+  ul, ol {
+    padding-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+
+  /* Tablas profesionales */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    page-break-inside: avoid;
+    font-size: 10pt;
+  }
+
+  th, td {
+    border: 1px solid #cbd5e0;
+    padding: 10px 14px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #ebf8ff;
+    color: var(--primary-color);
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) {
+    background-color: #fcfdfe;
+  }
+
+  /* Código */
+  pre, code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 9.5pt;
+    background-color: #f7fafc;
+    border-radius: 6px;
+  }
+
+  code {
+    padding: 2px 6px;
+    border: 1px solid var(--border-color);
+    background-color: #f7fafc;
+    color: #c53030;
+  }
+
+  pre {
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    overflow-x: auto;
+    margin-bottom: 25px;
+    page-break-inside: avoid;
+  }
+
+  pre code {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+  }
+
+  /* Bloques de notas */
+  blockquote {
+    margin: 20px 0;
+    padding: 15px 20px;
+    background-color: #f8fafc;
+    border-left: 4px solid var(--secondary-color);
+    color: #4a5568;
+    border-radius: 0 6px 6px 0;
+    page-break-inside: avoid;
+  }
+
+  blockquote p {
+    margin: 0;
+  }
+
+  /* Enlaces */
+  a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+  }
+
+  /* Salto de página para PDF */
+  .page-break {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  /* Portada elegante */
+  .portada {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80vh;
+    padding: 60px 0;
+    text-align: center;
+    box-sizing: border-box;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .portada {
+      width: 90%;
+    }
+  }
+
+  .portada-header {
+    font-size: 13pt;
+    font-weight: 600;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.5;
+  }
+
+  .portada-title-container {
+    margin: auto 0;
+    width: 100%;
+  }
+
+  .portada-title {
+    font-size: 40pt;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    border-bottom: none !important;
+  }
+
+  .portada-subtitle {
+    font-size: 16pt;
+    color: var(--secondary-color);
+    margin-top: 20px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .portada-divider {
+    width: 100px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    margin: 30px auto;
+    border-radius: 2px;
+  }
+
+  .portada-project-type {
+    font-size: 13pt;
+    color: #4a5568;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .portada-footer {
+    width: 100%;
+    border-top: 2px solid var(--border-color);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10.5pt;
+    color: #4a5568;
+  }
+
+  .portada-author-col {
+    text-align: left;
+    line-height: 1.6;
+  }
+
+  .portada-date-col {
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  /* ESTILOS DE LOS ESQUEMAS VISUALES EN HTML */
+  
+  /* 1. Stack Tecnológico */
+  .tech-stack-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 25px 0;
+    page-break-inside: avoid;
+  }
+  .tech-stack-layer {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 5px solid var(--secondary-color);
+    border-radius: 6px;
+    padding: 15px 20px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .tech-stack-layer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+  .tech-stack-layer-title {
+    font-weight: 700;
+    font-size: 11pt;
+    color: var(--primary-color);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .tech-stack-layer-desc {
+    font-size: 10pt;
+    color: #4a5568;
+    font-weight: 500;
+  }
+  .tech-stack-layer-subdesc {
+    font-size: 9pt;
+    color: #718096;
+    margin-top: 2px;
+  }
+
+  /* 2. Arquitectura de Contenedores Docker */
+  .docker-compose-container {
+    background-color: #f8fafc;
+    border: 2px dashed #cbd5e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 25px 0;
+    page-break-inside: avoid;
+  }
+  .docker-compose-title {
+    font-weight: 700;
+    font-size: 12pt;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .docker-containers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+  }
+  @media (max-width: 768px) {
+    .docker-containers-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .docker-containers-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .docker-container-box {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-top: 4px solid #4a5568;
+    border-radius: 6px;
+    padding: 15px 10px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .docker-container-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  }
+  .edge-service { border-top-color: #3182ce; }
+  .app-service { border-top-color: #38a169; }
+  .db-service { border-top-color: #dd6b20; }
+  .admin-service { border-top-color: #805ad5; }
+
+  .container-badge {
+    display: inline-block;
+    font-size: 7.5pt;
+    font-weight: 700;
+    background-color: #edf2f7;
+    color: #4a5568;
+    padding: 2px 6px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+  .container-title {
+    font-weight: 700;
+    font-size: 11pt;
+    color: #2d3748;
+    margin-bottom: 5px;
+  }
+  .container-desc {
+    font-size: 8.5pt;
+    color: #718096;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    min-height: 24px;
+  }
+  .container-tech {
+    font-size: 8pt;
+    font-weight: 600;
+    color: #4a5568;
+    border-top: 1px solid #edf2f7;
+    padding-top: 6px;
+  }
+  .docker-network-bar {
+    margin-top: 20px;
+    background-color: #edf2f7;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px;
+    text-align: center;
+    font-size: 9pt;
+    font-weight: 600;
+    color: #4a5568;
+  }
+
+  /* 3. Componentes Jerárquicos */
+  .component-tree {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 25px 0;
+    font-family: inherit;
+    page-break-inside: avoid;
+  }
+  .tree-node {
+    margin-left: 20px;
+    position: relative;
+    padding-left: 15px;
+    border-left: 1px solid #cbd5e0;
+    margin-top: 6px;
+  }
+  .tree-node.root {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+  }
+  .tree-node::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 10px;
+    height: 1px;
+    background-color: #cbd5e0;
+  }
+  .tree-node.root::before {
+    display: none;
+  }
+  .node-name {
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+  .node-file {
+    font-size: 8.5pt;
+    color: #718096;
+    font-family: monospace;
+    background-color: #edf2f7;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+  .node-tag {
+    font-size: 7.5pt;
+    font-weight: 600;
+    background-color: #e2e8f0;
+    color: #4a5568;
+    padding: 1px 5px;
+    border-radius: 4px;
+    margin-left: 5px;
+  }
+  .tree-children {
+    margin-top: 4px;
+  }
+  .tree-node.leaf {
+    color: #4a5568;
+    font-size: 9.5pt;
+  }
+
+  /* 4. Base de Datos Relacional */
+  .db-schema-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 25px;
+    margin: 25px 0;
+    page-break-inside: avoid;
+  }
+  @media (max-width: 768px) {
+    .db-schema-container {
+      flex-direction: column;
+      gap: 15px;
+    }
+    .db-schema-connectors {
+      transform: rotate(90deg);
+      margin: 10px 0;
+    }
+  }
+  .db-table-card {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    width: 240px;
+    flex-shrink: 0;
+  }
+  .db-table-title {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 10pt;
+    padding: 8px 12px;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .db-table-columns {
+    padding: 8px 0;
+  }
+  .db-column {
+    font-size: 8.5pt;
+    font-family: monospace;
+    padding: 4px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #edf2f7;
+  }
+  .db-column:last-child {
+    border-bottom: none;
+  }
+  .db-column-left {
+    display: flex;
+    align-items: center;
+  }
+  .db-column-left span {
+    font-size: 7pt;
+    font-weight: 700;
+    padding: 1px 4px;
+    border-radius: 3px;
+    margin-right: 6px;
+  }
+  .db-column.pk span { background-color: #ebf8ff; color: #2b6cb0; }
+  .db-column.uk span { background-color: #feebc8; color: #dd6b20; }
+  .db-column.fk span { background-color: #e6fffa; color: #319795; }
+  .col-type {
+    color: #a0aec0;
+    font-size: 8pt;
+  }
+  .db-schema-connectors {
+    font-weight: 700;
+    color: #718096;
+    font-size: 9pt;
+    text-align: center;
+  }
+  .db-tables-subgroup {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* 5. Fases del Proyecto */
+  .project-phases-container {
+    display: flex;
+    gap: 12px;
+    margin: 25px 0;
+    page-break-inside: avoid;
+  }
+  @media (max-width: 768px) {
+    .project-phases-container {
+      flex-direction: column;
+    }
+  }
+  .phase-step {
+    flex: 1;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .phase-step:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+  .phase-num {
+    width: 26px;
+    height: 26px;
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px auto;
+    font-size: 10pt;
+  }
+  .phase-name {
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1.3;
+  }
+
+  /* AJUSTES ESPECÍFICOS DE IMPRESIÓN */
+  @media print {
+    body {
+      background-color: #ffffff;
+      color: #000000;
+      font-size: 11pt;
+    }
+
+    .document-container {
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+      border: none;
+      max-width: 100%;
+    }
+
+    .portada {
+      height: 95vh;
+      padding: 2cm 0;
+    }
+
+    pre, code, blockquote, table, tr, img, 
+    .tech-stack-layer, .docker-compose-container, .docker-container-box,
+    .component-tree, .db-schema-container, .db-table-card, .phase-step {
+      page-break-inside: avoid;
+    }
+  }
+
+  </style>
+</head>
+<body>
+
+<!-- ENVOLTORIO PARA DISEÑO PROFESIONAL EN PANTALLA Y PDF -->
+<div class="document-container">
+<!-- PORTADA DE LA DOCUMENTACIÓN -->
+<div class="portada">
+<div class="portada-header">
+PROYECTO FIN DE CICLO<br>TÉCNICO SUPERIOR EN DESARROLLO DE APLICACIONES
+WEB (DAW)
+</div>
+<div class="portada-title-container">
+<div class="portada-title">
+MR FINANCE
+</div>
+<div class="portada-subtitle">
+Sistema Multi-contenedor de Gestión y Control de Finanzas Personales con
+Autenticación de Doble Factor y Proxy Inverso Seguro
+</div>
+<div class="portada-divider">
+
+</div>
+<div class="portada-project-type">
+DOCKER — REACT 19 — EXPRESS 5 — MYSQL 8 — NGINX
+</div>
+</div>
+<div class="portada-footer">
+<div class="portada-author-col">
+<strong>Autor:</strong> Carlos Pilar<br><strong>Ciclo:</strong> 2º de
+Desarrollo de Aplicaciones Web
+</div>
+<div class="portada-date-col">
+<strong>Fecha:</strong> Mayo 2026<br><strong>Lugar:</strong> Arroyo de Cuellar —
+Segovia, España
+</div>
+</div>
+</div>
+<div class="page-break">
+
+</div>
+<!-- ÍNDICE GENERAL -->
+<h2 id="índice-general">Índice General</h2>
+<ol type="1">
+<li><a href="#descripción-del-proyecto">Descripción del
+Proyecto</a></li>
+<li><a href="#manual-de-instalación">Manual de Instalación</a></li>
+<li><a href="#manual-de-configuración-del-servidor">Manual de
+Configuración del Servidor</a></li>
+<li><a href="#manual-de-usuario">Manual de Usuario</a></li>
+<li><a href="#documentación-técnica">Documentación Técnica</a></li>
+<li><a href="#referencia-de-la-api">Referencia de la API</a></li>
+<li><a href="#base-de-datos">Base de Datos</a></li>
+<li><a href="#solución-de-problemas">Solución de Problemas</a></li>
+<li><a href="#metodología-y-planificación-del-proyecto">Metodología y
+Planificación del Proyecto</a></li>
+<li><a href="#medidas-de-seguridad-implementadas">Medidas de
+Seguridad Implementadas</a></li>
+<li><a href="#pruebas-y-control-de-calidad">Pruebas y Control de
+Calidad</a></li>
+<li><a href="#conclusiones-y-trabajo-futuro">Conclusiones y Trabajo
+Futuro</a></li>
+<li><a href="#apéndice-mapa-de-puertos">Apéndice: Mapa de
+Puertos</a></li>
+</ol>
+<div class="page-break">
+
+</div>
+<h2 id="descripción-del-proyecto">1. Descripción del Proyecto</h2>
+<h3 id="qué-es-mr-finance">1.1 ¿Qué es MR Finance?</h3>
+<p><strong>MR Finance</strong> es una aplicación web avanzada de gestión
+de finanzas personales que permite a los usuarios registrar, visualizar
+y controlar exhaustivamente sus ingresos y gastos. La aplicación ofrece
+una interfaz moderna e intuitiva con gráficos interactivos y adaptativos
+para el seguimiento de la evolución financiera personal.</p>
+<h3 id="características-principales">1.2 Características
+Principales</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Registro de movimientos</strong></td>
+<td>Registra ingresos y gastos con categorías personalizadas</td>
+</tr>
+<tr>
+<td><strong>Gráficos interactivos</strong></td>
+<td>Visualiza la evolución de tu saldo con gráficos de área filtrable
+por periodo</td>
+</tr>
+<tr>
+<td><strong>Categorías personalizadas</strong></td>
+<td>Crea y gestiona tus propias categorías (Alimentación, Transporte,
+Ocio, etc.)</td>
+</tr>
+<tr>
+<td><strong>Autenticación segura</strong></td>
+<td>Contraseñas encriptadas de forma irreversible con el algoritmo
+bcrypt</td>
+</tr>
+<tr>
+<td><strong>Verificación en dos pasos (2FA)</strong></td>
+<td>Autenticación de doble factor vía correo electrónico mediante
+códigos de un solo uso</td>
+</tr>
+<tr>
+<td><strong>Perfil de usuario</strong></td>
+<td>Foto de perfil personalizable en formato PNG y metadatos de
+cuenta</td>
+</tr>
+<tr>
+<td><strong>Diseño responsive</strong></td>
+<td>Interfaz adaptativa optimizada para móviles, tablets y escritorios
+de alta resolución</td>
+</tr>
+<tr>
+<td><strong>Despliegue con Docker</strong></td>
+<td>Arquitectura containerizada y orquestada para garantizar
+portabilidad</td>
+</tr>
+<tr>
+<td><strong>Certificados SSL</strong></td>
+<td>HTTPS automático y seguro con Let’s Encrypt gestionado mediante
+Certbot</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stack-tecnológico">1.3 Stack Tecnológico</h3>
+<div class="tech-stack-container">
+<div class="tech-stack-layer">
+<div class="tech-stack-layer-title">Cliente (Frontend)</div>
+<div class="tech-stack-layer-desc">React 19 + TypeScript + Vite 8 + TailwindCSS 4</div>
+<div class="tech-stack-layer-subdesc">Librerías de UI: Shadcn/ui + Recharts + Axios</div>
+</div>
+<div class="tech-stack-layer">
+<div class="tech-stack-layer-title">Servidor (Backend)</div>
+<div class="tech-stack-layer-desc">Node.js 24 + Express 5 + MySQL2</div>
+<div class="tech-stack-layer-subdesc">Librerías de seguridad y utilidades: bcrypt + Nodemailer + Multer</div>
+</div>
+<div class="tech-stack-layer">
+<div class="tech-stack-layer-title">Base de Datos</div>
+<div class="tech-stack-layer-desc">MySQL 8 (Motor Relacional e Integridad Referencial)</div>
+</div>
+<div class="tech-stack-layer">
+<div class="tech-stack-layer-title">Proxy y Capa SSL</div>
+<div class="tech-stack-layer-desc">Nginx + Certbot (Let's Encrypt para cifrado en tránsito HTTPS)</div>
+</div>
+<div class="tech-stack-layer">
+<div class="tech-stack-layer-title">Infraestructura de Despliegue</div>
+<div class="tech-stack-layer-desc">Docker + Docker Compose (Entornos Aislados Multi-contenedor)</div>
+</div>
+</div>
+<h3 id="arquitectura-de-contenedores">1.4 Arquitectura de
+Contenedores</h3>
+<p>La aplicación se compone de <strong>4 contenedores Docker</strong>
+orquestados con Docker Compose:</p>
+<div class="docker-compose-container">
+<div class="docker-compose-title">
+Docker Compose (mr_finance)
+</div>
+<div class="docker-containers-grid">
+<div class="docker-container-box edge-service">
+  <div class="container-badge">Puertos 80 / 443</div>
+  <div class="container-title">nginx</div>
+  <div class="container-desc">Proxy Inverso y gestión de cifrado HTTPS SSL</div>
+  <div class="container-tech">Nginx + Certbot</div>
+</div>
+
+<div class="docker-container-box app-service">
+  <div class="container-badge">Puertos 5173 / 8081</div>
+  <div class="container-title">app</div>
+  <div class="container-desc">Servidor de desarrollo y API del backend</div>
+  <div class="container-tech">Node.js + React + Express</div>
+</div>
+
+<div class="docker-container-box db-service">
+  <div class="container-badge">Puerto 3306</div>
+  <div class="container-title">db</div>
+  <div class="container-desc">Motor relacional de base de datos</div>
+  <div class="container-tech">MySQL 8</div>
+</div>
+
+<div class="docker-container-box admin-service">
+  <div class="container-badge">Puerto 8080</div>
+  <div class="container-title">phpmyadmin</div>
+  <div class="container-desc">Administración visual y mantenimiento de datos</div>
+  <div class="container-tech">phpMyAdmin</div>
+</div>
+</div>
+<div class="docker-network-bar">
+Red Interna de Comunicación Aislada: dev_net (bridge)
+</div>
+</div>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Contenedor</th>
+<th>Imagen</th>
+<th>Puertos</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node_app2</code></td>
+<td>node:24-alpine (build custom)</td>
+<td>3000, 5173, 8081, 587</td>
+<td>Frontend Vite + Backend Express</td>
+</tr>
+<tr>
+<td><code>nginx_server</code></td>
+<td>jonasal/nginx-certbot:latest</td>
+<td>80, 443</td>
+<td>Proxy inverso + SSL automático</td>
+</tr>
+<tr>
+<td><code>mysql2</code></td>
+<td>mysql:latest</td>
+<td>3306</td>
+<td>Base de datos MySQL</td>
+</tr>
+<tr>
+<td><code>phpmyAdmin2</code></td>
+<td>phpmyadmin:latest</td>
+<td>8080</td>
+<td>Administración visual de la BD</td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h2 id="manual-de-instalación">2. Manual de Instalación</h2>
+<h3 id="requisitos-previos">2.1 Requisitos Previos</h3>
+<h4 id="software-necesario">Software necesario</h4>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Software</th>
+<th>Versión mínima</th>
+<th>Enlace de descarga</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Docker Desktop</strong></td>
+<td>24.0+</td>
+<td><a
+href="https://www.docker.com/products/docker-desktop/">docker.com/get-docker</a></td>
+</tr>
+<tr>
+<td><strong>Docker Compose</strong></td>
+<td>v2.0+ (incluido en Docker Desktop)</td>
+<td>Incluido en Docker Desktop</td>
+</tr>
+<tr>
+<td><strong>Git</strong></td>
+<td>2.30+</td>
+<td><a href="https://git-scm.com/downloads">git-scm.com</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="requisitos-del-sistema">Requisitos del sistema</h4>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Recurso</th>
+<th>Mínimo</th>
+<th>Recomendado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RAM</strong></td>
+<td>4 GB</td>
+<td>8 GB</td>
+</tr>
+<tr>
+<td><strong>Disco</strong></td>
+<td>5 GB libres</td>
+<td>10 GB libres</td>
+</tr>
+<tr>
+<td><strong>CPU</strong></td>
+<td>2 núcleos</td>
+<td>4 núcleos</td>
+</tr>
+<tr>
+<td><strong>Sistema Operativo</strong></td>
+<td>Windows 10/11 Pro, macOS 12+, Ubuntu 20.04+</td>
+<td>Windows 11 Pro, macOS 14+, Ubuntu 22.04+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Nota Windows:</strong> Docker Desktop requiere <strong>WSL
+2</strong> (Windows Subsystem for Linux 2) activado. Docker Desktop lo
+configura automáticamente durante la instalación.</p>
+</blockquote>
+<h3 id="instalación-paso-a-paso">2.2 Instalación paso a paso</h3>
+<h4 id="paso-1-clonar-el-repositorio">Paso 1: Clonar el repositorio</h4>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="op">&lt;</span>URL_DEL_REPOSITORIO<span class="op">&gt;</span> DockerMrFinance</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> DockerMrFinance</span></code></pre></div>
+<h4 id="paso-2-verificar-la-estructura-del-proyecto">Paso 2: Verificar
+la estructura del proyecto</h4>
+<p>Asegúrate de que el directorio tiene la siguiente estructura:</p>
+<pre><code>DockerMrFinance/
+├── Dockerfile                 # Imagen personalizada de Node.js
+├── docker-compose.yml         # Orquestación de contenedores
+├── entrypoint.sh              # Script de arranque del contenedor app
+├── nginx.conf                 # Configuración del proxy Nginx
+├── comandoStartSrv            # Comando rápido de inicio manual
+├── app/                       # Código fuente de la aplicación
+│   └── mrfinance/
+│       ├── client/            # Frontend (React + Vite)
+│       │   ├── src/
+│       │   │   ├── auth/      # Componentes de autenticación
+│       │   │   ├── dashboard/ # Componentes del panel principal
+│       │   │   ├── components/# Componentes UI (Shadcn)
+│       │   │   ├── Login.tsx  # Página principal de login
+│       │   │   └── main.tsx   # Punto de entrada
+│       │   ├── public/
+│       │   │   └── fotosDePerfil/  # Fotos de perfil de usuarios
+│       │   └── vite.config.ts
+│       └── server/            # Backend (Express)
+│           ├── server.js      # Servidor principal con API REST
+│           ├── authService.js # Servicio de autenticación 2FA
+│           ├── mailer.js      # Configuración de envío de correos
+│           └── .env           # Variables de entorno del servidor
+└── db/
+    └── init/
+        └── 01_MrFinanceV2.sql # Script de inicialización de la BD</code></pre>
+<h4 id="paso-3-construir-y-levantar-los-contenedores">Paso 3: Construir
+y levantar los contenedores</h4>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">--build</span></span></code></pre></div>
+<blockquote>
+<p><strong>Información:</strong> La primera ejecución tardará unos
+minutos ya que Docker necesita descargar las imágenes base, compilar la
+imagen personalizada, instalar dependencias npm e inicializar la base de
+datos con el script SQL provisto.</p>
+</blockquote>
+<h4
+id="paso-4-verificar-que-todos-los-contenedores-están-corriendo">Paso 4:
+Verificar que todos los contenedores están corriendo</h4>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose ps</span></code></pre></div>
+<p>Deberías ver algo similar a:</p>
+<pre><code>NAME              SERVICE      STATUS
+mysql2            db           running (healthy)
+node_app2         app          running
+nginx_server      nginx        running
+phpmyAdmin2       phpmyadmin   running</code></pre>
+<h4 id="paso-5-acceder-a-la-aplicación">Paso 5: Acceder a la
+aplicación</h4>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>URL</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Frontend (desarrollo)</strong></td>
+<td>http://localhost:5173</td>
+<td>Interfaz de usuario con HMR</td>
+</tr>
+<tr>
+<td><strong>Backend API</strong></td>
+<td>http://localhost:8081</td>
+<td>API REST directa</td>
+</tr>
+<tr>
+<td><strong>phpMyAdmin</strong></td>
+<td>http://localhost:8080</td>
+<td>Administración de la base de datos</td>
+</tr>
+<tr>
+<td><strong>Nginx (producción)</strong></td>
+<td>https://mrfinance.freemyip.com</td>
+<td>Producción con SSL (requiere dominio configurado)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="usuarios-de-prueba-precargados">2.3 Usuarios de prueba
+precargados</h3>
+<p>La base de datos se inicializa con los siguientes usuarios de
+ejemplo:</p>
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Email</th>
+<th>Contraseña</th>
+<th>2FA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ana García</td>
+<td><code>ana@example.com</code></td>
+<td><code>1231</code></td>
+<td>Desactivado</td>
+</tr>
+<tr>
+<td>Luis Pérez</td>
+<td><code>luis@example.com</code></td>
+<td><code>123</code></td>
+<td>Activado</td>
+</tr>
+<tr>
+<td>Pepe</td>
+<td><code>pepe@example.com</code></td>
+<td><code>pepe</code></td>
+<td>Desactivado</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Advertencia:</strong> Estos usuarios son únicamente para
+pruebas. Las contraseñas se migrarán automáticamente a formato bcrypt
+seguro tras el primer inicio de sesión del usuario correspondiente.</p>
+</blockquote>
+<h3 id="detener-la-aplicación">2.4 Detener la aplicación</h3>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Detener los contenedores (mantiene los datos intactos)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose stop</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Detener y eliminar los contenedores (mantiene los volúmenes de datos)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose down</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Detener, eliminar contenedores Y eliminar los datos (Advertencia: DESTRUCTIVO)</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose down <span class="at">-v</span></span></code></pre></div>
+<div class="page-break">
+
+</div>
+<h2 id="manual-de-configuración-del-servidor">3. Manual de Configuración
+del Servidor</h2>
+<h3 id="configuración-de-docker-compose">3.1 Configuración de Docker
+Compose</h3>
+<p>El archivo <code>docker-compose.yml</code> define toda la
+infraestructura. A continuación se detallan las variables configurables
+de cada servicio:</p>
+<h4 id="servicio-app-node.js">3.1.1 Servicio <code>app</code>
+(Node.js)</h4>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">app</span><span class="kw">:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">NODE_ENV</span><span class="kw">:</span><span class="at"> development</span><span class="co">    # Cambia a &#39;production&#39; en producción</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">DB_HOST</span><span class="kw">:</span><span class="at"> db</span><span class="co">              # Nombre del servicio de BD (no cambiar si se usa Docker)</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">DB_PORT</span><span class="kw">:</span><span class="at"> </span><span class="dv">3306</span><span class="co">            # Puerto de MySQL</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">DB_USER</span><span class="kw">:</span><span class="at"> user</span><span class="co">            # Usuario de la base de datos</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">DB_PASSWORD</span><span class="kw">:</span><span class="at"> user</span><span class="co">        # Contraseña del usuario de BD</span></span></code></pre></div>
+<p><strong>Variables de entorno del servidor</strong> (archivo
+<code>app/mrfinance/server/.env</code>):</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Descripción</th>
+<th>Valor por defecto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GMAIL_USER</code></td>
+<td>Correo Gmail para el envío de códigos 2FA</td>
+<td><code>noreply.mrfinance@gmail.com</code></td>
+</tr>
+<tr>
+<td><code>GMAIL_APP_PASS</code></td>
+<td>Contraseña de aplicación de Gmail (App Password)</td>
+<td><em>(ver sección 3.3)</em></td>
+</tr>
+</tbody>
+</table>
+<h4 id="servicio-db-mysql">3.1.2 Servicio <code>db</code> (MySQL)</h4>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">db</span><span class="kw">:</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">MYSQL_ROOT_PASSWORD</span><span class="kw">:</span><span class="at"> root</span><span class="co">       # Contraseña del usuario root</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">MYSQL_DATABASE</span><span class="kw">:</span><span class="at"> MrFinanceV2</span><span class="co">     # Nombre de la base de datos</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">MYSQL_USER</span><span class="kw">:</span><span class="at"> user</span><span class="co">                # Usuario de la aplicación</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">MYSQL_PASSWORD</span><span class="kw">:</span><span class="at"> user</span><span class="co">            # Contraseña del usuario de la aplicación</span></span></code></pre></div>
+<blockquote>
+<p><strong>Importante para producción:</strong> Cambia TODAS las
+contraseñas por defecto antes de desplegar en un entorno expuesto a
+Internet.</p>
+</blockquote>
+<h4 id="servicio-nginx-proxy-inverso-ssl">3.1.3 Servicio
+<code>nginx</code> (Proxy Inverso + SSL)</h4>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nginx</span><span class="kw">:</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">CERTBOT_EMAIL</span><span class="kw">:</span><span class="at"> noreply.mrfinance@gmail.com</span><span class="co">  # Email para notificaciones de certificados</span></span></code></pre></div>
+<h4 id="servicio-phpmyadmin-administración-bd">3.1.4 Servicio
+<code>phpmyadmin</code> (Administración BD)</h4>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">phpmyadmin</span><span class="kw">:</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">PMA_HOST</span><span class="kw">:</span><span class="at"> db</span><span class="co">           # Host de MySQL</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">PMA_PORT</span><span class="kw">:</span><span class="at"> </span><span class="dv">3306</span><span class="co">         # Puerto de MySQL</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">PMA_USER</span><span class="kw">:</span><span class="at"> root</span><span class="co">         # Usuario de acceso a phpMyAdmin</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">PMA_PASSWORD</span><span class="kw">:</span><span class="at"> root</span><span class="co">     # Contraseña de acceso</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">UPLOAD_LIMIT</span><span class="kw">:</span><span class="at"> 100M</span><span class="co">     # Límite de importación de archivos SQL</span></span></code></pre></div>
+<h3 id="configuración-de-nginx">3.2 Configuración de Nginx</h3>
+<p>El archivo <code>nginx.conf</code> configura el proxy inverso con dos
+bloques <code>server</code>:</p>
+<h4 id="bloque-http-puerto-80-redirección-a-https">Bloque HTTP (puerto
+80) — Redirección a HTTPS</h4>
+<pre class="nginx"><code>server {
+    listen 80;
+    server_name mrfinance.freemyip.com;
+
+    # Toda petición HTTP se redirige automáticamente a HTTPS
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}</code></pre>
+<h4 id="bloque-https-puerto-443-servicio-de-la-aplicación">Bloque HTTPS
+(puerto 443) — Servicio de la aplicación</h4>
+<pre class="nginx"><code>server {
+    listen 443 ssl;
+    server_name mrfinance.freemyip.com;
+
+    # Certificados SSL gestionados por Certbot automáticamente
+    ssl_certificate /etc/letsencrypt/live/mrfinance.freemyip.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/mrfinance.freemyip.com/privkey.pem;
+
+    # Frontend: archivos estáticos de React compilados
+    location / {
+        root /usr/share/nginx/html;
+        index index.html;
+        try_files $uri $uri/ /index.html;  # SPA fallback
+    }
+
+    # Backend: proxy inverso a la API Express
+    location /api/ {
+        proxy_pass http://app:8081/;  # La &#39;/&#39; final elimina el prefijo /api/
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}</code></pre>
+<h3 id="configuración-del-servicio-de-correo-2fa">3.3 Configuración del
+servicio de correo (2FA)</h3>
+<p>La verificación en dos pasos utiliza Gmail SMTP. Para
+configurarlo:</p>
+<h4
+id="paso-1-habilitar-la-verificación-en-2-pasos-en-tu-cuenta-de-google">Paso
+1: Habilitar la Verificación en 2 pasos en tu cuenta de Google</h4>
+<ol type="1">
+<li>Ve a <a
+href="https://myaccount.google.com/security">myaccount.google.com/security</a></li>
+<li>Activa la “Verificación en 2 pasos”</li>
+</ol>
+<h4 id="paso-2-generar-una-contraseña-de-aplicación">Paso 2: Generar una
+Contraseña de Aplicación</h4>
+<ol type="1">
+<li>Ve a <a
+href="https://myaccount.google.com/apppasswords">myaccount.google.com/apppasswords</a></li>
+<li>Selecciona “Otro” y escribe “MrFinance”</li>
+<li>Copia la contraseña de 16 caracteres generada</li>
+</ol>
+<h4 id="paso-3-configurar-las-variables-de-entorno">Paso 3: Configurar
+las variables de entorno</h4>
+<p>Edita el archivo <code>app/mrfinance/server/.env</code>:</p>
+<pre class="env"><code>GMAIL_USER=tu_correo@gmail.com
+GMAIL_APP_PASS=xxxx xxxx xxxx xxxx</code></pre>
+<div class="page-break">
+
+</div>
+<h2 id="manual-de-usuario">4. Manual de Usuario</h2>
+<h3 id="acceso-a-la-aplicación">4.1 Acceso a la Aplicación</h3>
+<p>Abre tu navegador de preferencia y accede a: - <strong>Desarrollo
+local:</strong> <code>http://localhost:5173</code> -
+<strong>Producción:</strong> <code>https://mrfinance.freemyip.com</code>
+(o tu dominio personalizado)</p>
+<h3 id="pantalla-de-bienvenida">4.2 Pantalla de Bienvenida</h3>
+<p>Al acceder, verás la pantalla de bienvenida con dos opciones claras:
+- <strong>“Iniciar sesión”</strong> — Si ya dispones de una cuenta
+activa. - <strong>“Crear cuenta”</strong> — Si eres un usuario nuevo en
+el sistema.</p>
+<p>En escritorio, la interfaz se divide visualmente a la mitad: a la
+izquierda, la sección gráfica de bienvenida “Hello Thrifty” y a la
+derecha los formularios. En móviles, se condensa mostrando únicamente el
+formulario.</p>
+<h3 id="registro-de-cuenta-nueva">4.3 Registro de cuenta nueva</h3>
+<ol type="1">
+<li>Pulsa <strong>“Crear cuenta”</strong> en la pantalla de
+bienvenida.</li>
+<li>Introduce los siguientes datos:
+<ul>
+<li><strong>Nombre:</strong> Tu nombre público de usuario.</li>
+<li><strong>Email:</strong> Un correo válido y único en el sistema.</li>
+<li><strong>Contraseña:</strong> Mínimo de <strong>12
+caracteres</strong> para garantizar seguridad robusta.</li>
+</ul></li>
+<li>Pulsa <strong>“Registrarse”</strong>. Tras el éxito, entrarás
+directamente al panel principal.</li>
+</ol>
+<h3 id="iniciar-sesión">4.4 Iniciar sesión</h3>
+<ol type="1">
+<li>Pulsa <strong>“Iniciar sesión”</strong> en la pantalla de
+bienvenida.</li>
+<li>Introduce tu <strong>email</strong> y <strong>contraseña</strong> y
+haz clic en <strong>“Entrar”</strong>.</li>
+</ol>
+<h4 id="flujo-normal-sin-2fa">Flujo normal (sin 2FA)</h4>
+<p>Si no has activado la verificación en dos pasos, serás redirigido
+inmediatamente al dashboard de finanzas.</p>
+<h4 id="flujo-con-2fa-activado">Flujo con 2FA activado</h4>
+<p>Si cuenta con seguridad 2FA activada: 1. Aparecerá un <strong>modal
+interactivo de verificación</strong>. 2. Recibirás de inmediato un
+<strong>código de 4 dígitos</strong> en tu correo. 3. Escribe o pega el
+código en el modal. Se validará automáticamente. 4. Dispones de
+<strong>3 intentos</strong> y el código expira tras <strong>10
+minutos</strong>.</p>
+<h3 id="panel-principal-dashboard">4.5 Panel Principal (Dashboard)</h3>
+<p>El dashboard cuenta con las siguientes secciones: -
+<strong>Portfolio:</strong> Vista principal con gráfico interactivo y
+listado de transacciones. - <strong>Información de la Cuenta:</strong>
+Configuración del perfil, cambio de imagen en formato PNG y activación
+de 2FA. - <strong>Añadir movimientos:</strong> Formulario dinámico de
+ingreso o gasto con creación instantánea de categorías.</p>
+<h3 id="vista-de-portfolio-pantalla-principal">4.6 Vista de Portfolio
+(Pantalla principal)</h3>
+<h4 id="gráfico-de-evolución-del-saldo">Gráfico de evolución del
+saldo</h4>
+<p>Muestra la progresión del saldo a lo largo del tiempo. -
+<strong>Color Verde o Azul:</strong> Si tu saldo general es positivo. -
+<strong>Color Rojo:</strong> Si tu saldo entra en números negativos
+(aviso visual). - <strong>Filtros rápidos:</strong> Permite visualizar
+periodos de 7 días, 30 días, 3 meses o histórico completo.</p>
+<h4 id="lista-de-movimientos">Lista de Movimientos</h4>
+<p>Muestra todas las transacciones ordenadas cronológicamente de forma
+descendente. Permite editar y eliminar transacciones de forma
+instantánea.</p>
+<div class="page-break">
+
+</div>
+<h2 id="documentación-técnica">5. Documentación Técnica</h2>
+<h3 id="estructura-del-frontend">5.1 Estructura del Frontend</h3>
+<p>El frontend está estructurado mediante un sistema de componentes
+React y flujos jerárquicos:</p>
+<div class="component-tree">
+<div class="tree-node root">
+<span class="node-name">LoginPage</span> <span class="node-file">Login.tsx</span>
+<div class="tree-children">
+  
+  <div class="tree-node">
+    <span class="node-name">AuthSelector</span> <span class="node-file">auth/AuthSelector.tsx</span>
+    <div class="tree-children">
+      <div class="tree-node leaf">Botón "Iniciar sesión"</div>
+      <div class="tree-node leaf">Botón "Crear cuenta"</div>
+    </div>
+  </div>
+  
+  <div class="tree-node">
+    <span class="node-name">LoginForm</span> <span class="node-file">auth/LoginForm.tsx</span>
+    <div class="tree-children">
+      <div class="tree-node">
+        <span class="node-name">AutenticationModal</span> <span class="node-file">auth/AuthenticationModal.tsx</span> <span class="node-tag">Seguridad 2FA</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="tree-node">
+    <span class="node-name">RegisterForm</span> <span class="node-file">auth/RegisterForm.tsx</span>
+  </div>
+  
+  <div class="tree-node">
+    <span class="node-name">Dashboard</span> <span class="node-file">dashboard/main.tsx</span>
+    <div class="tree-children">
+      <div class="tree-node leaf"><span class="node-name">Menu</span> <span class="node-file">dashboard/menu.tsx</span> <span class="node-tag">Menú Lateral</span></div>
+      <div class="tree-node leaf"><span class="node-name">Cabecera</span> <span class="node-file">dashboard/cabecera.tsx</span> <span class="node-tag">Barra Superior</span></div>
+      <div class="tree-node leaf"><span class="node-name">ChartAreaInteractive</span> <span class="node-file">dashboard/chart.tsx</span> <span class="node-tag">Gráfico</span></div>
+      <div class="tree-node leaf">Lista de movimientos <span class="node-file">en dashboard/main.tsx</span></div>
+      <div class="tree-node leaf"><span class="node-name">EditarModal</span> <span class="node-file">dashboard/editarModal.tsx</span> <span class="node-tag">Edición</span></div>
+      <div class="tree-node leaf"><span class="node-name">AddFunds</span> <span class="node-file">dashboard/addfunds.tsx</span> <span class="node-tag">Movimientos</span></div>
+      <div class="tree-node leaf"><span class="node-name">AccountInfo</span> <span class="node-file">dashboard/account-info.tsx</span> <span class="node-tag">Perfil</span></div>
+    </div>
+  </div>
+  
+</div>
+</div>
+</div>
+<h3 id="estructura-del-backend">5.2 Estructura del Backend</h3>
+<p>El backend se ejecuta sobre un servidor Express 5 rápido y
+seguro:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Archivo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>server.js</code></td>
+<td>Enrutamiento principal, middlewares de validación y control de
+endpoints API</td>
+</tr>
+<tr>
+<td><code>authService.js</code></td>
+<td>Gestión y validación temporal en memoria de los códigos de
+verificación de 4 dígitos</td>
+</tr>
+<tr>
+<td><code>mailer.js</code></td>
+<td>Configuración segura del transporte SMTP con pool de conexiones y
+cifrado TLS</td>
+</tr>
+<tr>
+<td><code>.env</code></td>
+<td>Variables de entorno confidenciales excluidas del repositorio
+Git</td>
+</tr>
+</tbody>
+</table>
+<h3 id="componentes-de-interfaz-shadcnui">5.3 Componentes de Interfaz
+(Shadcn/ui)</h3>
+<p>Toda la interfaz está basada en componentes reutilizables de
+<strong>Shadcn/ui</strong> configurados en
+<code>client/src/components/ui/</code> utilizando estilos utilitarios
+modernos y fluidos.</p>
+<div class="page-break">
+
+</div>
+<h2 id="referencia-de-la-api">6. Referencia de la API</h2>
+<p>Todos los endpoints se encuentran protegidos tras el prefijo
+<code>/api/</code>.</p>
+<h3 id="autenticación">6.1 Autenticación</h3>
+<h4 id="post-login"><code>POST /login</code></h4>
+<p>Inicia sesión de usuario en el sistema.</p>
+<ul>
+<li><p><strong>Cuerpo de la solicitud (JSON):</strong></p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;email&quot;</span><span class="fu">:</span> <span class="st">&quot;usuario@example.com&quot;</span><span class="fu">,</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;password&quot;</span><span class="fu">:</span> <span class="st">&quot;mi_contraseña_segura&quot;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div></li>
+<li><p><strong>Respuestas:</strong></p>
+<ul>
+<li><code>200 OK</code> (Sin 2FA):
+<code>{ "success": true, "user": { "id": 1, "nombre": "Ana" } }</code></li>
+<li><code>200 OK</code> (Requiere 2FA):
+<code>{ "success": true, "requires2fa": true, "email": "ana@example.com" }</code></li>
+<li><code>401 Unauthorized</code>:
+<code>{ "success": false, "message": "Email o contraseña incorrectos" }</code></li>
+</ul></li>
+</ul>
+<h4 id="post-verify-2fa"><code>POST /verify-2fa</code></h4>
+<p>Valida el código temporal enviado por correo.</p>
+<ul>
+<li><p><strong>Cuerpo de la solicitud (JSON):</strong></p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;email&quot;</span><span class="fu">:</span> <span class="st">&quot;usuario@example.com&quot;</span><span class="fu">,</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;codigo&quot;</span><span class="fu">:</span> <span class="st">&quot;1234&quot;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div></li>
+<li><p><strong>Respuestas:</strong></p>
+<ul>
+<li><code>200 OK</code>:
+<code>{ "success": true, "user": { ... } }</code></li>
+<li><code>401 Unauthorized</code>:
+<code>{ "success": false, "message": "Código incorrecto o expirado" }</code></li>
+</ul></li>
+</ul>
+<hr />
+<h3 id="movimientos">6.2 Movimientos</h3>
+<h4 id="post-movimientos"><code>POST /movimientos</code></h4>
+<p>Lista transacciones del usuario. * <strong>Cuerpo de la solicitud
+(JSON):</strong> <code>{ "userId": 1, "pass": "$2b$10$..." }</code></p>
+<h4 id="post-add-movimiento"><code>POST /add-movimiento</code></h4>
+<p>Registra un nuevo ingreso o gasto. * <strong>Cuerpo de la solicitud
+(JSON):</strong>
+<code>json   {     "userId": 1,     "pass": "$2b$10$...",     "tipo": "gasto",     "monto": 25.00,     "fecha": "2026-05-23",     "id_categoria": 1,     "concepto": "Cena restaurante"   }</code></p>
+<div class="page-break">
+
+</div>
+<h2 id="base-de-datos">7. Base de Datos</h2>
+<h3 id="esquema-relacional">7.1 Esquema Relacional</h3>
+<p>La base de datos se denomina <code>MrFinanceV2</code> y se ejecuta
+sobre el motor relacional MySQL 8.</p>
+<div style="text-align: center; margin: 25px 0; page-break-inside: avoid;">
+<img src="Entidad-relacion.png" alt="Esquema Entidad-Relación de la base de datos MrFinanceV2" style="max-width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; background-color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+<p style="font-size: 9pt; color: #718096; margin-top: 10px; font-style: italic;">Figura 1: Diagrama Entidad-Relación de la base de datos MrFinanceV2</p>
+</div>
+<h3 id="definición-de-tablas">7.2 Definición de Tablas</h3>
+<h4 id="tabla-usuarios">Tabla <code>usuarios</code></h4>
+<ul>
+<li>Almacena las cuentas registradas en el sistema.</li>
+<li>La columna <code>pass</code> almacena contraseñas cifradas
+irreversiblemente mediante hashing (bcrypt).</li>
+</ul>
+<h4 id="tabla-categoria">Tabla <code>categoria</code></h4>
+<ul>
+<li>Almacena las categorías que los usuarios crean para clasificar
+transacciones. Posee una relación recursiva-lógica hacia el usuario
+propietario.</li>
+</ul>
+<h4 id="tabla-movimientos">Tabla <code>movimientos</code></h4>
+<ul>
+<li>Almacena los ingresos y gastos reales con una referencia clave
+foránea obligatoria al usuario y a la categoría asignada.</li>
+</ul>
+<h3 id="triggers-de-integridad-referencial">7.3 Triggers de Integridad
+Referencial</h3>
+<h4 id="trigger-trg_before_delete_usuario">Trigger
+<code>trg_before_delete_usuario</code></h4>
+<p>Se ejecuta antes de borrar un usuario. Elimina en cascada todos sus
+movimientos y categorías correspondientes en la base de datos para
+impedir registros huérfanos.</p>
+<h4 id="trigger-trg_before_delete_categoria">Trigger
+<code>trg_before_delete_categoria</code></h4>
+<p>Impide eliminar una categoría si cuenta con movimientos asociados.
+Lanza un código de estado estructurado <code>SQLSTATE '45000'</code>
+interrumpiendo la operación de borrado y protegiendo los datos.</p>
+<div class="page-break">
+
+</div>
+<h2 id="solución-de-problemas">8. Solución de Problemas</h2>
+<h3 id="problemas-comunes-y-soluciones-rápidas">8.1 Problemas Comunes y
+Soluciones Rápidas</h3>
+<h4 id="el-contenedor-app-no-consigue-levantar-correctamente">1. El
+contenedor <code>app</code> no consigue levantar correctamente</h4>
+<ul>
+<li><p><strong>Síntoma:</strong> El contenedor se apaga constantemente o
+muestra reinicios recurrentes.</p></li>
+<li><p><strong>Solución:</strong> Ejecuta
+<code>docker compose logs app</code> para leer los logs en vivo. Si hay
+problemas en la compilación de <code>bcrypt</code>, realiza un borrado
+de volumen ejecutando:</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose down</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> volume rm mr_finance_mrfinance_server_modules</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">--build</span></span></code></pre></div></li>
+</ul>
+<h4 id="error-de-conexión-con-la-base-de-datos">2. Error de conexión con
+la Base de Datos</h4>
+<ul>
+<li><p><strong>Síntoma:</strong> El log de node_app2 indica:
+<code>Error conectando a la DB</code>.</p></li>
+<li><p><strong>Solución:</strong> MySQL cambia sus estados a listos unos
+segundos adicionales en iniciar la primera ejecución mientras crea las
+tablas. Asegúrate de esperar a que finalice o reconstruye los
+contenedores desde cero eliminando los datos previos:</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose down <span class="at">-v</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">--build</span></span></code></pre></div></li>
+</ul>
+<h4 id="códigos-2fa-no-se-envían-al-correo">3. Códigos 2FA no se envían
+al correo</h4>
+<ul>
+<li><strong>Síntoma:</strong> Modal de 2FA aparece en pantalla pero el
+correo no llega a la bandeja de entrada.</li>
+<li><strong>Solución:</strong> Revisa el archivo
+<code>server/.env</code>. Verifica que la contraseña del correo sea una
+<strong>Contraseña de Aplicación de 16 dígitos</strong> válida generada
+dentro de Google Account y no tu contraseña de correo normal.</li>
+</ul>
+<div class="page-break">
+
+</div>
+<h2 id="metodología-y-planificación-del-proyecto">9. Metodología y
+Planificación del Proyecto</h2>
+<p>Para el correcto desarrollo de <strong>MR Finance</strong>, se ha
+seguido una rigurosa planificación estructurada basada en metodologías
+ágiles, orientando el proyecto hacia un flujo incremental de valor
+constante.</p>
+<h3 id="metodología-de-desarrollo">9.1 Metodología de Desarrollo</h3>
+<p>Se ha seleccionado la metodología <strong>Kanban</strong> debido a su
+gran flexibilidad para la gestión y adaptación continua de tareas
+individuales en proyectos unipersonales.</p>
+<ul>
+<li><strong>Git / GitHub:</strong> Control de versiones de código. Se
+utilizó una rama principal <code>main</code> estable y ramas de
+características (<code>feature/</code>) para desarrollar y testear
+funcionalidades aisladas (como 2FA, maquetación de componentes y proxy
+reverso) de forma segura.</li>
+<li><strong>Tablero Kanban:</strong> Herramienta visual digital para
+monitorizar las diferentes fases de las tareas: <em>Por Hacer</em>,
+<em>En Progreso</em>, <em>Fase de Pruebas</em> y
+<em>Completado</em>.</li>
+</ul>
+<h3 id="fases-del-ciclo-de-vida-del-software">9.2 Fases del Ciclo de
+Vida del Software</h3>
+<p>El desarrollo se ha dividido cronológicamente en <strong>6 fases
+principales</strong>:</p>
+<div class="project-phases-container">
+<div class="phase-step">
+<div class="phase-num">1</div>
+<div class="phase-name">Análisis y Requisitos</div>
+</div>
+<div class="phase-step">
+<div class="phase-num">2</div>
+<div class="phase-name">Diseño de BD y Esquemas</div>
+</div>
+<div class="phase-step">
+<div class="phase-num">3</div>
+<div class="phase-name">Desarrollo Backend</div>
+</div>
+<div class="phase-step">
+<div class="phase-num">4</div>
+<div class="phase-name">Desarrollo Frontend</div>
+</div>
+<div class="phase-step">
+<div class="phase-num">5</div>
+<div class="phase-name">Integración Docker y SSL</div>
+</div>
+<div class="phase-step">
+<div class="phase-num">6</div>
+<div class="phase-name">Pruebas y Documentación</div>
+</div>
+</div>
+<ol type="1">
+<li><strong>Fase 1: Análisis y Definición de Requisitos:</strong>
+Recopilación de necesidades de negocio y especificaciones de software
+(2FA por correo, persistencia relacional, aislamiento de
+credenciales).</li>
+<li><strong>Fase 2: Diseño de Base de Datos y Maquetación:</strong>
+Creación de diagramas entidad-relación y definición de restricciones y
+triggers de integridad referencial.</li>
+<li><strong>Fase 3: Desarrollo de la API de Backend:</strong> Creación
+del servidor Node.js/Express, configuración de Nodemailer SMTP y
+servicio de cifrado bcrypt.</li>
+<li><strong>Fase 4: Desarrollo de Frontend SPA:</strong> Creación de
+componentes React 19, integración de gráficos interactivos dinámicos de
+Recharts y control de estados de sesión.</li>
+<li><strong>Fase 5: Integración e Infraestructura Docker:</strong>
+Orquestación multi-contenedor del sistema completo, proxy inverso Nginx
+y generación de certificados SSL automatizados.</li>
+<li><strong>Fase 6: Pruebas, Optimización y Documentación:</strong>
+Testing manual exhaustivo de flujos extremos, rate limiting y redacción
+del manual del proyecto.</li>
+</ol>
+<h3 id="estimación-temporal-y-distribución-de-esfuerzos">9.3 Estimación
+Temporal y Distribución de Esfuerzos</h3>
+<p>A continuación se presenta un desglose de las horas estimadas de
+dedicación para cada una de las fases del proyecto:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Fase de Desarrollo</th>
+<th>Duración Estimada (Horas)</th>
+<th>Porcentaje de Esfuerzo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Análisis y Requisitos</td>
+<td>15 horas</td>
+<td>10%</td>
+</tr>
+<tr>
+<td>Diseño de BD y Arquitectura</td>
+<td>20 horas</td>
+<td>13%</td>
+</tr>
+<tr>
+<td>Desarrollo Backend (API REST)</td>
+<td>35 horas</td>
+<td>23%</td>
+</tr>
+<tr>
+<td>Desarrollo Frontend (React SPA)</td>
+<td>45 horas</td>
+<td>30%</td>
+</tr>
+<tr>
+<td>Infraestructura (Docker, Nginx, SSL)</td>
+<td>20 horas</td>
+<td>13%</td>
+</tr>
+<tr>
+<td>Pruebas, Refactorización y Documentación</td>
+<td>15 horas</td>
+<td>10%</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td><strong>150 horas</strong></td>
+<td><strong>100%</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h2 id="medidas-de-seguridad-implementadas">10. Medidas de Seguridad
+Implementadas</h2>
+<p>La seguridad ha sido un pilar fundamental en la concepción y
+desarrollo de la aplicación MR Finance. Se han implementado múltiples
+capas de seguridad para salvaguardar la privacidad de la información
+financiera y credenciales de los usuarios.</p>
+<h3 id="almacenamiento-seguro-de-credenciales-bcrypt">10.1
+Almacenamiento Seguro de Credenciales (Bcrypt)</h3>
+<p>Las contraseñas no se almacenan nunca en texto plano. En su lugar, el
+backend utiliza el algoritmo de hashing seguro <strong>bcrypt</strong>
+con un factor de coste de <strong>10</strong>. *
+<strong>Ventaja:</strong> Cifrado unidireccional e irreversible
+resistente a ataques de fuerza bruta y de tablas de arcoíris. *
+<strong>Migración Automática:</strong> El sistema cuenta con lógica de
+migración para transformar antiguas claves en texto plano a hashes
+bcrypt de forma totalmente invisible para el usuario final durante su
+primer inicio de sesión correcto.</p>
+<h3 id="autenticación-de-doble-factor-2fa-segura">10.2 Autenticación de
+Doble Factor (2FA) Segura</h3>
+<p>La verificación en dos pasos proporciona una capa crucial contra los
+accesos no autorizados: * <strong>Generación Robusta:</strong> Los
+códigos temporales se componen de 4 dígitos numéricos generados
+dinámicamente en tiempo de ejecución. * <strong>Ciclo de Vida
+Corto:</strong> Tienen una validez máxima de <strong>10 minutos</strong>
+en memoria temporal y se destruyen de inmediato tras su uso. *
+<strong>Bloqueo Brute-Force:</strong> Se implementa un límite estricto
+de <strong>3 intentos</strong>. Si un atacante intenta adivinar el
+código mediante fuerza bruta, el código se invalida inmediatamente tras
+el tercer fallo consecutivo, obligando a iniciar el proceso de inicio de
+sesión completo nuevamente.</p>
+<h3 id="prevención-de-ataques-de-inyección-sql">10.3 Prevención de
+Ataques de Inyección SQL</h3>
+<p>La interacción con la base de datos MySQL 8 se realiza exclusivamente
+mediante <strong>sentencias preparadas</strong> haciendo uso del
+conector optimizado <code>mysql2/promise</code>. *
+<strong>Mecanismo:</strong> Los datos introducidos por el usuario final
+se envían separados de la estructura de la consulta SQL mediante
+parámetros posicionales (<code>?</code>), impidiendo que caracteres
+maliciosos modifiquen la lógica interna de ejecución de la base de
+datos.</p>
+<h3 id="aislamiento-de-secretos-y-variables-de-entorno">10.4 Aislamiento
+de Secretos y Variables de Entorno</h3>
+<p>Toda la información sensible del sistema se almacena fuera del código
+de la aplicación: * <strong>Configuración Local:</strong> Variables
+críticas como credenciales SMTP y accesos MySQL se definen en ficheros
+locales <code>.env</code> protegidos mediante reglas estrictas en el
+archivo de exclusión <code>.gitignore</code>. * <strong>Aislamiento
+Docker:</strong> La comunicación interna entre contenedores (como el
+host de conexión <code>db</code>) se realiza mediante variables
+parametrizadas inyectadas de forma dinámica en tiempo de construcción y
+arranque.</p>
+<h3 id="securización-del-proxy-inverso-nginx-y-ssltls">10.5 Securización
+del Proxy Inverso Nginx y SSL/TLS</h3>
+<p>El tráfico web está cifrado de extremo a extremo utilizando los
+estándares del sector: * <strong>Cifrado de Tránsito:</strong> Todo el
+canal de datos se cifra obligatoriamente bajo protocolo seguro HTTPS en
+el puerto 443. * <strong>Redirección Forzosa:</strong> Cualquier
+petición entrante en el puerto estándar HTTP (puerto 80) es interceptada
+y redirigida con código de estado HTTP 301 de forma instantánea a HTTPS.
+* <strong>Certificados Certbot:</strong> La imagen de Nginx renueva y
+gestiona los certificados de Let’s Encrypt de forma automática sin
+requerir la intervención manual del administrador del servidor.</p>
+<div class="page-break">
+
+</div>
+<h2 id="pruebas-y-control-de-calidad">11. Pruebas y Control de
+Calidad</h2>
+<p>Para asegurar la robustez de los algoritmos y una experiencia de
+usuario sobresaliente, se ejecutó una completa matriz de pruebas
+funcionales y de compatibilidad.</p>
+<h3 id="control-de-calidad-de-la-api-backend">11.1 Control de Calidad de
+la API Backend</h3>
+<p>Se realizaron baterías de pruebas manuales y simulaciones de llamadas
+directas utilizando clientes HTTP (Postman) para verificar la
+consistencia de las respuestas del servidor: * <strong>Control de
+Códigos de Estado:</strong> Retorno correcto de estados HTTP
+(<code>200 OK</code> para éxito, <code>401 Unauthorized</code> para
+credenciales erróneas, <code>409 Conflict</code> para duplicación de
+datos). * <strong>Validación de Datos Entrantes:</strong> Middleware
+interceptor en Express que rechaza de forma instantánea peticiones que
+no cumplan con el esquema requerido (como montos nulos, negativos o
+categorías inexistentes).</p>
+<h3 id="compatibilidad-e-interfaz-de-usuario-ux">11.2 Compatibilidad e
+Interfaz de Usuario (UX)</h3>
+<p>Se ha validado el comportamiento gráfico del frontend mediante
+emulación de múltiples pantallas en las herramientas de desarrollo del
+navegador: * <strong>Diseño Fluido:</strong> Verificación de menús
+adaptativos (menú lateral en pantallas grandes y barra de iconos
+superior en teléfonos móviles). * <strong>Comportamiento del
+Gráfico:</strong> Comprobación del renderizado en tiempo real del área
+interactiva (azul/verde si el balance es positivo, y cambio dinámico a
+color rojo si se detectan pérdidas financieras).</p>
+<h3 id="matriz-de-pruebas-funcionales-uat">11.3 Matriz de Pruebas
+Funcionales (UAT)</h3>
+<p>A continuación se detallan los casos de uso sometidos a prueba y sus
+resultados correspondientes:</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr>
+<th>ID</th>
+<th>Módulo</th>
+<th>Caso de Prueba</th>
+<th>Entrada de Datos</th>
+<th>Comportamiento Esperado</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TP-01</strong></td>
+<td>Autenticación</td>
+<td>Registro con contraseña demasiado corta</td>
+<td>Contraseña de 8 caracteres</td>
+<td>Muestra error visual; el sistema impide el registro.</td>
+<td><strong>APROBADA</strong></td>
+</tr>
+<tr>
+<td><strong>TP-02</strong></td>
+<td>Autenticación</td>
+<td>Registro correcto de nueva cuenta</td>
+<td>Datos válidos, clave &gt; 12 chars</td>
+<td>Accede correctamente; redirige al dashboard.</td>
+<td><strong>APROBADA</strong></td>
+</tr>
+<tr>
+<td><strong>TP-03</strong></td>
+<td>Autenticación</td>
+<td>Login con verificación 2FA activa</td>
+<td>Credenciales correctas de Luis</td>
+<td>Recibe código por correo; abre el modal de verificación.</td>
+<td><strong>APROBADA</strong></td>
+</tr>
+<tr>
+<td><strong>TP-04</strong></td>
+<td>Autenticación</td>
+<td>Error reiterado en código 2FA</td>
+<td>Código inválido en 3 intentos</td>
+<td>Invalida sesión y redirige a pantalla de login.</td>
+<td><strong>APROBADA</strong></td>
+</tr>
+<tr>
+<td><strong>TP-05</strong></td>
+<td>Finanzas</td>
+<td>Registro de transacción inválida</td>
+<td>Monto nulo o negativo</td>
+<td>El botón se deshabilita o retorna advertencia.</td>
+<td><strong>APROBADA</strong></td>
+</tr>
+<tr>
+<td><strong>TP-06</strong></td>
+<td>Finanzas</td>
+<td>Eliminar categoría con movimientos</td>
+<td>Clic en eliminar categoría activa</td>
+<td>BD lanza error SQLSTATE 45000; se impide el borrado.</td>
+<td><strong>APROBADA</strong></td>
+</tr>
+<tr>
+<td><strong>TP-07</strong></td>
+<td>Perfil</td>
+<td>Cambio de foto de perfil con formato erróneo</td>
+<td>Subida de archivo JPEG / SVG</td>
+<td>El validador rechaza el formato; solo permite PNG.</td>
+<td><strong>APROBADA</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h2 id="conclusiones-y-trabajo-futuro">12. Conclusiones y Trabajo
+Futuro</h2>
+<p>El proyecto <strong>MR Finance</strong> representa una solución
+integral, robusta y escalable para la gestión financiera. Ha permitido
+unificar metodologías de desarrollo full-stack con buenas prácticas en
+infraestructuras y despliegues modernos.</p>
+<h3 id="conclusiones-y-aprendizaje">12.1 Conclusiones y Aprendizaje</h3>
+<p>El desarrollo del proyecto ha aportado valiosas competencias técnicas
+en diversas áreas críticas: * <strong>Orquestación y
+Despliegue:</strong> Docker Compose ha demostrado ser una herramienta
+excepcional para el aislamiento y unificación de entornos complejos,
+eliminando por completo el clásico problema del entorno local. *
+<strong>Seguridad como Criterio de Diseño:</strong> La integración de
+2FA interactivo y encriptación de datos ha permitido asimilar de forma
+práctica las normativas y metodologías modernas de desarrollo seguro de
+software. * <strong>Componentización Modular:</strong> El desarrollo del
+frontend con React 19 y Shadcn/ui ha posibilitado la creación de una
+aplicación fluida, rápida y atractiva que ofrece una experiencia
+dinámica al usuario final.</p>
+<h3 id="líneas-de-trabajo-futuro">12.2 Líneas de Trabajo Futuro</h3>
+<p>Como evolución natural del proyecto, se plantean los siguientes
+desarrollos y ampliaciones técnicas:</p>
+<ol type="1">
+<li><strong>Módulo de Planificación y Presupuestos (Budgets):</strong>
+Posibilidad de establecer límites máximos de gasto mensual por
+categoría. El sistema enviará alertas en tiempo real al usuario si su
+consumo se aproxima a la cuota prefijada.</li>
+<li><strong>Visualización de Gráficos Avanzados:</strong> Incorporación
+de gráficos circulares para ver la distribución porcentual de gastos por
+categoría, complementando el gráfico de área temporal existente.</li>
+<li><strong>Exportación Automatizada de Informes:</strong> Opción de
+descargar listados de movimientos filtrados en formatos estándar de
+oficina (PDF para impresión estructurada y hojas de cálculo Excel/CSV
+para auditorías personales).</li>
+<li><strong>Integración con OAuth 2.0 (Autenticación Social):</strong>
+Habilitar el inicio de sesión directo con cuentas de Google, GitHub o
+Microsoft, facilitando la incorporación de nuevos usuarios sin
+comprometer la seguridad.</li>
+<li><strong>Notificaciones Push y Recordatorios PWA:</strong> Convertir
+la aplicación en Progressive Web App (PWA) e integrar notificaciones
+periódicas para recordar al usuario el registro regular de sus
+movimientos diarios.</li>
+</ol>
+<div class="page-break">
+
+</div>
+<h2 id="apéndice-mapa-de-puertos">Apéndice: Mapa de Puertos</h2>
+<p>A continuación se detalla la correspondencia de los puertos
+utilizados en la arquitectura de contenedores para asegurar la correcta
+comunicación interna y externa del sistema:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Puerto Host</th>
+<th>Puerto Contenedor</th>
+<th>Servicio Docker</th>
+<th>Protocolo</th>
+<th>Descripción del Servicio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>80</strong></td>
+<td>80</td>
+<td><code>nginx</code></td>
+<td>TCP</td>
+<td>Servidor Web HTTP (Redirección automática a HTTPS)</td>
+</tr>
+<tr>
+<td><strong>443</strong></td>
+<td>443</td>
+<td><code>nginx</code></td>
+<td>TCP</td>
+<td>Servidor Web HTTPS (Servicio Frontend y API Proxy)</td>
+</tr>
+<tr>
+<td><strong>3000</strong></td>
+<td>3000</td>
+<td><code>app</code></td>
+<td>TCP</td>
+<td>Puerto reservado para flujos de prueba internos</td>
+</tr>
+<tr>
+<td><strong>3306</strong></td>
+<td>3306</td>
+<td><code>db</code></td>
+<td>TCP</td>
+<td>Acceso de datos directo al motor MySQL 8</td>
+</tr>
+<tr>
+<td><strong>5173</strong></td>
+<td>5173</td>
+<td><code>app</code></td>
+<td>TCP</td>
+<td>Servidor de desarrollo de Vite (Frontend local)</td>
+</tr>
+<tr>
+<td><strong>8080</strong></td>
+<td>80</td>
+<td><code>phpmyadmin</code></td>
+<td>TCP</td>
+<td>Panel Web de Administración visual de la base de datos</td>
+</tr>
+<tr>
+<td><strong>8081</strong></td>
+<td>8081</td>
+<td><code>app</code></td>
+<td>TCP</td>
+<td>API REST de backend (Servidor Express de producción)</td>
+</tr>
+<tr>
+<td><strong>587</strong></td>
+<td>587</td>
+<td><code>app</code></td>
+<td>TCP</td>
+<td>Conectividad de envío SMTP seguro (Gmail)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Documentación ampliada, estructurada y adaptada para la
+conversión directa a formato PDF.</em><br />
+<strong>MR Finance © 2026. Todos los derechos reservados.</strong></p>
+</div>
+
+</body>
+</html>
