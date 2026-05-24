@@ -1215,96 +1215,9 @@ Registra un nuevo ingreso o gasto.
 
 La base de datos se denomina `MrFinanceV2` y se ejecuta sobre el motor relacional MySQL 8.
 
-<div class="db-schema-container">
-  
-  <div class="db-table-card">
-    <div class="db-table-title">usuarios</div>
-    <div class="db-table-columns">
-      <div class="db-column pk">
-        <div class="db-column-left"><span>PK</span> id</div>
-        <span class="col-type">INT</span>
-      </div>
-      <div class="db-column">
-        <div class="db-column-left">nombre</div>
-        <span class="col-type">VARCHAR(100)</span>
-      </div>
-      <div class="db-column uk">
-        <div class="db-column-left"><span>UK</span> email</div>
-        <span class="col-type">VARCHAR(120)</span>
-      </div>
-      <div class="db-column">
-        <div class="db-column-left">pass</div>
-        <span class="col-type">VARCHAR(120)</span>
-      </div>
-      <div class="db-column">
-        <div class="db-column-left">is_2fa</div>
-        <span class="col-type">BOOLEAN</span>
-      </div>
-      <div class="db-column">
-        <div class="db-column-left">fecha_registro</div>
-        <span class="col-type">DATETIME</span>
-      </div>
-    </div>
-  </div>
-  
-  <div class="db-schema-connectors">
-    <div class="connector-line">1 : N<br>◀───▶</div>
-  </div>
-
-  <div class="db-tables-subgroup">
-    <div class="db-table-card">
-      <div class="db-table-title">categoria</div>
-      <div class="db-table-columns">
-        <div class="db-column pk">
-          <div class="db-column-left"><span>PK</span> id</div>
-          <span class="col-type">INT</span>
-        </div>
-        <div class="db-column">
-          <div class="db-column-left">nombre</div>
-          <span class="col-type">VARCHAR(100)</span>
-        </div>
-        <div class="db-column fk">
-          <div class="db-column-left"><span>FK</span> id_usuario</div>
-          <span class="col-type">INT</span>
-        </div>
-      </div>
-    </div>
-    
-    <div class="db-table-card">
-      <div class="db-table-title">movimientos</div>
-      <div class="db-table-columns">
-        <div class="db-column pk">
-          <div class="db-column-left"><span>PK</span> id</div>
-          <span class="col-type">INT</span>
-        </div>
-        <div class="db-column">
-          <div class="db-column-left">concepto</div>
-          <span class="col-type">VARCHAR(255)</span>
-        </div>
-        <div class="db-column">
-          <div class="db-column-left">tipo</div>
-          <span class="col-type">ENUM</span>
-        </div>
-        <div class="db-column">
-          <div class="db-column-left">monto</div>
-          <span class="col-type">DECIMAL(10,2)</span>
-        </div>
-        <div class="db-column">
-          <div class="db-column-left">fecha</div>
-          <span class="col-type">DATETIME</span>
-        </div>
-        <div class="db-column fk">
-          <div class="db-column-left"><span>FK</span> id_usuario</div>
-          <span class="col-type">INT</span>
-        </div>
-        <div class="db-column fk">
-          <div class="db-column-left"><span>FK</span> id_categoria</div>
-          <span class="col-type">INT</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
+<div style="text-align: center; margin: 25px 0; page-break-inside: avoid;">
+  <img src="Entidad-relacion.png" alt="Esquema Entidad-Relación de la base de datos MrFinanceV2" style="max-width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; background-color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+  <p style="font-size: 9pt; color: #718096; margin-top: 10px; font-style: italic;">Figura 1: Diagrama Entidad-Relación de la base de datos MrFinanceV2</p>
 </div>
 
 ### 7.2 Definición de Tablas
