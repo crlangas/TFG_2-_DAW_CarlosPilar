@@ -1,0 +1,47 @@
+DROP DATABASE IF EXISTS mrFinanceV1;
+CREATE DATABASE mrFinanceV1;
+USE mrFinanceV1;
+
+-- Usuarios
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    email VARCHAR(50) UNIQUE,
+    pass VARCHAR(100) NOT NULL,
+    fecha_registro DATE DEFAULT CURRENT_DATE
+);
+
+-- Metodos de pago
+CREATE TABLE metodos_pago (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    nombre VARCHAR(50),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+        ON DELETE CASCADE
+);
+
+-- Categorias
+CREATE TABLE categorias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50)
+);
+
+-- Movimientos
+CREATE TABLE movimientos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    id_metodo_pago INT,
+    id_categoria INT,
+    tipo ENUM('gasto', 'ingreso'),
+    monto DECIMAL(10,2),
+    fecha DATE DEFAULT CURRENT_DATE,
+
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (id_metodo_pago) REFERENCES metodos_pago(id)
+        ON DELETE SET NULL,
+
+    FOREIGN KEY (id_categoria) REFERENCES categorias(id)
+        ON DELETE SET NULL
+);
