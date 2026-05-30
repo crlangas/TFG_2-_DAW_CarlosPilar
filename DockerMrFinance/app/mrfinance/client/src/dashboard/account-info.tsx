@@ -27,6 +27,19 @@ export default function AccountInfo({ user, onLogout, setCurrentView }: Props) {
 
   const [imageTimestamp, setImageTimestamp] = useState(Date.now());
 
+  const formatFecha = (fechaStr: Date | string) => {
+    try {
+      const dateObj = new Date(fechaStr);
+      if (isNaN(dateObj.getTime())) return String(fechaStr);
+      const yyyy = dateObj.getFullYear();
+      const mm = String(dateObj.getMonth() + 1).padStart(2, "0");
+      const dd = String(dateObj.getDate()).padStart(2, "0");
+      return `${yyyy}-${mm}-${dd}`;
+    } catch {
+      return String(fechaStr);
+    }
+  };
+
   const handleToggle2fa = async (newValue: boolean) => {
     try {
       const res = await axios.post("/api/toggle-2fa", {
@@ -154,9 +167,7 @@ export default function AccountInfo({ user, onLogout, setCurrentView }: Props) {
                       <FieldContent>
                         <FieldTitle>Fecha de registro</FieldTitle>
                         <FieldDescription>
-                          {fechaRegistro instanceof Date
-                            ? fechaRegistro.toLocaleDateString()
-                            : String(fechaRegistro)}
+                          {formatFecha(fechaRegistro)}
                         </FieldDescription>
                       </FieldContent>
                     </Field>

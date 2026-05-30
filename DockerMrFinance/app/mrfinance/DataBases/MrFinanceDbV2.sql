@@ -1,3 +1,5 @@
+SET NAMES utf8mb4;
+
 -- ============================================================
 -- Base de datos: MrFinanceV2
 -- Segunda version con triggers para el borrado automatico en vez de on delete cascade
@@ -12,13 +14,13 @@ USE MrFinanceV2;
 -- Tabla: usuarios
 -- ------------------------------------------------------------
 CREATE TABLE usuarios (
-  id              INT          NOT NULL AUTO_INCREMENT,
+  id_usuario              INT          NOT NULL AUTO_INCREMENT,
   nombre          VARCHAR(100) NOT NULL,
   email           VARCHAR(120) NOT NULL,
   pass            VARCHAR(120) NOT NULL,
   is_2fa          BOOLEAN      NOT NULL DEFAULT FALSE,
   fecha_registro  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
+  PRIMARY KEY (id_usuario),
   -- unique key en los email para que no existan usuarios duplicados
   UNIQUE KEY uq_usuarios_email (email)
 );
@@ -26,21 +28,21 @@ CREATE TABLE usuarios (
 -- ------------------------------------------------------------
 -- Tabla: categoria
 -- ------------------------------------------------------------
-CREATE TABLE categoria (
-  id      INT          NOT NULL AUTO_INCREMENT,
+CREATE TABLE categorias (
+  id_categoria      INT          NOT NULL AUTO_INCREMENT,
   nombre  VARCHAR(100) NOT NULL,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id_categoria)
 );
 
 -- ------------------------------------------------------------
 -- Tabla usuario_categoria
 -- ------------------------------------------------------------
-CREATE TABLE usuario_categoria (
+CREATE TABLE usuarios_categorias (
   id_usuario   INT NOT NULL,
   id_categoria INT NOT NULL,
   PRIMARY KEY (id_usuario, id_categoria),
-  FOREIGN KEY (id_usuario)   REFERENCES usuarios  (id),
-  FOREIGN KEY (id_categoria) REFERENCES categoria (id)
+  FOREIGN KEY (id_usuario)   REFERENCES usuarios  (id_usuario),
+  FOREIGN KEY (id_categoria) REFERENCES categorias (id_categoria)
 );
 
 -- ------------------------------------------------------------
@@ -60,8 +62,8 @@ CREATE TABLE movimientos (
   INDEX idx_movimientos_categoria (id_categoria),
   INDEX idx_movimientos_fecha     (fecha),
   -- foreing keys referentes a los usuarios y categorias
-  FOREIGN KEY (id_usuario) REFERENCES usuarios (id),
-  FOREIGN KEY (id_categoria) REFERENCES categoria (id)
+  FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario),
+  FOREIGN KEY (id_categoria) REFERENCES categorias (id_categoria)
 );
 
 
@@ -80,8 +82,8 @@ CREATE TRIGGER trg_before_delete_usuario
 BEFORE DELETE ON usuarios
 FOR EACH ROW
 BEGIN
-  DELETE FROM movimientos  WHERE id_usuario = OLD.id;
-  DELETE FROM usuario_categoria WHERE id_usuario = OLD.id;
+  DELETE FROM movimientos  WHERE id_usuario = OLD.id_usuario;
+  DELETE FROM usuarios_categorias WHERE id_usuario = OLD.id_usuario;
 END$$
 
 -- ------------------------------------------------------------
@@ -91,14 +93,14 @@ END$$
 -- Tambien limpia la tabla pivot si no hay movimientos asociados.
 -- ------------------------------------------------------------
 CREATE TRIGGER trg_before_delete_categoria
-BEFORE DELETE ON categoria
+BEFORE DELETE ON categorias
 FOR EACH ROW
 BEGIN
   DECLARE v_total INT;
 
   SELECT COUNT(*) INTO v_total
   FROM movimientos
-  WHERE id_categoria = OLD.id;
+  WHERE id_categoria = OLD.id_categoria;
 
   IF v_total > 0 THEN
     SIGNAL SQLSTATE '45000'
@@ -106,7 +108,7 @@ BEGIN
   END IF;
 
   -- si no hay movimientos, limpia las filas auxiliares antes de borrar la categoria
-  DELETE FROM usuario_categoria WHERE id_categoria = OLD.id;
+  DELETE FROM usuarios_categorias WHERE id_categoria = OLD.id_categoria;
 END$$
 
 DELIMITER ;
@@ -122,7 +124,7 @@ INSERT INTO usuarios (nombre, email, pass, is_2fa) VALUES
   ('pepe',  'pepe@example.com', 'pepe', FALSE);
 
 -- las categorias ya no pertenecen a un usuario concreto para evitar repeticion de valores
-INSERT INTO categoria (nombre) VALUES
+INSERT INTO categorias (nombre) VALUES
   ('Alimentación'),
   ('Transporte'),
   ('Salario'),
@@ -130,7 +132,7 @@ INSERT INTO categoria (nombre) VALUES
   ('Ahorro');
 
 -- cada usuario se asocia a las categorias que usa
-INSERT INTO usuario_categoria (id_usuario, id_categoria) VALUES
+INSERT INTO usuarios_categorias (id_usuario, id_categoria) VALUES
   (1, 1), -- Ana   -> Alimentación
   (1, 3), -- Ana   -> Salario
   (1, 4), -- Ana   -> Ocio

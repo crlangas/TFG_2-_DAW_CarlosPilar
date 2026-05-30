@@ -86,7 +86,7 @@ db.connect((err) => {
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
-  const sql = "SELECT * FROM usuarios WHERE email = ?";
+  const sql = "SELECT *, id_usuario AS id FROM usuarios WHERE email = ?";
   db.query(sql, [email], async (err, data) => {
     if (err) {
       console.error("Error en query:", err.message);
@@ -110,6 +110,7 @@ app.post('/login', (req, res) => {
         const hashedPass = bcrypt.hashSync(password, salt);
         db.query("UPDATE usuarios SET pass = ? WHERE email = ?", [hashedPass, user.email]);
         console.log(`Contraseña migrada a bcrypt para: ${user.email}`);
+        user.pass = hashedPass;
       }
     }
 
@@ -150,7 +151,7 @@ app.post('/verify-2fa', (req, res) => {
   }
 
   // Codigo correcto: devuelve los datos del usuario
-  const sql = "SELECT * FROM usuarios WHERE email = ?";
+  const sql = "SELECT *, id_usuario AS id FROM usuarios WHERE email = ?";
   db.query(sql, [email], (err, data) => {
     if (err) {
       return res.status(500).json({ success: false, message: "Error del servidor" });
@@ -206,7 +207,7 @@ app.post('/movimientos', (req, res) => {
     const { userId, pass } = req.body;
 
     // Primero comprueba si el usuario existe y coincide la contraseña
-    const sqlCheckUser = "SELECT * FROM usuarios WHERE id = ? AND pass = ?";
+    const sqlCheckUser = "SELECT *, id_usuario AS id FROM usuarios WHERE id_usuario = ? AND pass = ?";
     db.query(sqlCheckUser, [userId, pass], (err, data) => {
         if (err) {
             console.error("Error en query:", err.message);
@@ -222,7 +223,7 @@ app.post('/movimientos', (req, res) => {
         const sqlMovimientos = `
             SELECT m.*, c.nombre as categoria_nombre 
             FROM movimientos m
-            LEFT JOIN categoria c ON m.id_categoria = c.id
+            LEFT JOIN categorias c ON m.id_categoria = c.id_categoria
             WHERE m.id_usuario = ?
             ORDER BY m.fecha DESC
         `;
@@ -244,7 +245,7 @@ app.post('/categorias/list', (req, res) => {
     const pass = req.body.data.pass;
 
     // primero comprueba que el usuario existe y coincide la contraseña
-    const sqlCheckUser = "SELECT * FROM usuarios WHERE id = ? AND pass = ?";
+    const sqlCheckUser = "SELECT *, id_usuario AS id FROM usuarios WHERE id_usuario = ? AND pass = ?";
     db.query(sqlCheckUser, [userId, pass], (err, data) => {
         if (err) {
             console.error("Error en query:", err.message);
@@ -255,8 +256,14 @@ app.post('/categorias/list', (req, res) => {
             return res.status(401).json({ success: false, message: "Usuario no autorizado" });
         }
 
-        //una vez autenticado pilla los datos de la tabla categorias.
-        const sql = "SELECT * FROM categoria WHERE id_usuario = ? ORDER BY nombre ASC";
+        //una vez autenticado pilla con un inner join los datos de la tabla categorias a traves de la tabla pivot usuario_categoria.
+        const sql = `
+            SELECT c.*, c.id_categoria AS id 
+            FROM categorias c
+            INNER JOIN usuarios_categorias uc ON c.id_categoria = uc.id_categoria
+            WHERE uc.id_usuario = ?
+            ORDER BY c.nombre ASC
+        `;
         db.query(sql, [userId], (err, data) => {
             if (err) {
                 console.error("Error en query:", err.message);
@@ -276,7 +283,7 @@ app.post('/categorias', (req, res) => {
     }
 
     // primero comprueba que el usuario existe y coincide la contraseña
-    const sqlCheckUser = "SELECT * FROM usuarios WHERE id = ? AND pass = ?";
+    const sqlCheckUser = "SELECT *, id_usuario AS id FROM usuarios WHERE id_usuario = ? AND pass = ?";
     db.query(sqlCheckUser, [userId, pass], (err, data) => {
         if (err) {
             console.error("Error en query:", err.message);
@@ -287,26 +294,59 @@ app.post('/categorias', (req, res) => {
             return res.status(401).json({ success: false, message: "Usuario no autorizado" });
         }
 
-        // Comprueba si ya existe una categoría con ese nombre para ese usuario
-        const sqlCheck = "SELECT * FROM categoria WHERE nombre = ? AND id_usuario = ?";
-        db.query(sqlCheck, [nombre.trim(), userId], (err, data) => {
+        // 1. Busca si la categoría con ese nombre ya existe de forma global en la tabla categoria
+        const sqlFindGlobal = "SELECT *, id_categoria AS id FROM categorias WHERE nombre = ?";
+        db.query(sqlFindGlobal, [nombre.trim()], (err, globalCats) => {
             if (err) {
                 console.error("Error en query:", err.message);
                 return res.status(500).json({ success: false, message: "Error del servidor" });
             }
 
-            if (data.length > 0) {
-                return res.status(409).json({ success: false, message: "Esa categoría ya existe" });
-            }
+            if (globalCats.length > 0) {
+                // La categoría ya existe a nivel global, comprobamos si ya está asociada a este usuario en la tabla pivot
+                const existingCat = globalCats[0];
+                const sqlCheckLink = "SELECT * FROM usuarios_categorias WHERE id_usuario = ? AND id_categoria = ?";
+                db.query(sqlCheckLink, [userId, existingCat.id], (err, links) => {
+                    if (err) {
+                        console.error("Error en query:", err.message);
+                        return res.status(500).json({ success: false, message: "Error del servidor" });
+                    }
 
-            const sqlInsert = "INSERT INTO categoria (nombre, id_usuario) VALUES (?, ?)";
-            db.query(sqlInsert, [nombre.trim(), userId], (err, result) => {
-                if (err) {
-                    console.error("Error en query:", err.message);
-                    return res.status(500).json({ success: false, message: "Error del servidor" });
-                }
-                return res.status(200).json({ success: true, categoria: { id: result.insertId, nombre: nombre.trim(), id_usuario: userId } });
-            });
+                    if (links.length > 0) {
+                        return res.status(409).json({ success: false, message: "Esa categoría ya existe" });
+                    }
+
+                    // Si no está asociada, creamos la relación en la tabla pivot usuario_categoria
+                    const sqlInsertLink = "INSERT INTO usuarios_categorias (id_usuario, id_categoria) VALUES (?, ?)";
+                    db.query(sqlInsertLink, [userId, existingCat.id], (err) => {
+                        if (err) {
+                            console.error("Error en query:", err.message);
+                            return res.status(500).json({ success: false, message: "Error del servidor" });
+                        }
+                        return res.status(200).json({ success: true, categoria: { id: existingCat.id, nombre: existingCat.nombre, id_usuario: userId } });
+                    });
+                });
+            } else {
+                // La categoría no existe de forma global, la insertamos primero en la tabla categoria
+                const sqlInsertGlobal = "INSERT INTO categorias (nombre) VALUES (?)";
+                db.query(sqlInsertGlobal, [nombre.trim()], (err, result) => {
+                    if (err) {
+                        console.error("Error en query:", err.message);
+                        return res.status(500).json({ success: false, message: "Error del servidor" });
+                    }
+                    const newCatId = result.insertId;
+
+                    // Creamos la relación en la tabla pivot usuario_categoria
+                    const sqlInsertLink = "INSERT INTO usuarios_categorias (id_usuario, id_categoria) VALUES (?, ?)";
+                    db.query(sqlInsertLink, [userId, newCatId], (err) => {
+                        if (err) {
+                            console.error("Error en query:", err.message);
+                            return res.status(500).json({ success: false, message: "Error del servidor" });
+                        }
+                        return res.status(200).json({ success: true, categoria: { id: newCatId, nombre: nombre.trim(), id_usuario: userId } });
+                    });
+                });
+            }
         });
     });
 });
@@ -330,7 +370,7 @@ app.post('/add-movimiento', (req, res) => {
     }
 
     // Verificar que el usuario existe y la contraseña coincide (mismo patrón que /movimientos)
-    const sqlCheckUser = "SELECT * FROM usuarios WHERE id = ?";
+    const sqlCheckUser = "SELECT *, id_usuario AS id FROM usuarios WHERE id_usuario = ?";
     db.query(sqlCheckUser, [userId], (err, data) => {
         if (err) {
             console.error("Error en query:", err.message);
@@ -389,7 +429,7 @@ app.post('/borrar-movimiento', (req, res) => {
     }
 
     // Verificar que el usuario existe y la contraseña coincide
-    const sqlCheckUser = "SELECT * FROM usuarios WHERE id = ?";
+    const sqlCheckUser = "SELECT *, id_usuario AS id FROM usuarios WHERE id_usuario = ?";
     db.query(sqlCheckUser, [userId], (err, data) => {
         if (err) {
             console.error("Error en query:", err.message);
@@ -449,7 +489,7 @@ app.post('/mod-movimiento', (req, res) => {
         return res.status(400).json({ success: false, message: "El monto debe ser mayor que 0" });
     }
 
-    const sqlCheckUser = "SELECT * FROM usuarios WHERE id = ?";
+    const sqlCheckUser = "SELECT *, id_usuario AS id FROM usuarios WHERE id_usuario = ?";
     db.query(sqlCheckUser, [userId], (err, data) => {
         if (err) {
             console.error("Error en query:", err.message);
@@ -494,7 +534,7 @@ app.post('/userInfo', (req, res) => {
         return res.status(400).json({ success: false, message: "Faltan credenciales de usuario" });
     }
     // valida que la pass sea correcta
-    const sqlCheckUser = "SELECT * FROM usuarios WHERE id = ? AND pass = ?";
+    const sqlCheckUser = "SELECT *, id_usuario AS id FROM usuarios WHERE id_usuario = ? AND pass = ?";
 
     db.query(sqlCheckUser, [userId, pass], (err, data) => {
         if (err) {
@@ -516,7 +556,7 @@ app.post('/toggle-2fa', (req, res) => {
         return res.status(400).json({ success: false, message: "Faltan credenciales de usuario" });
     }
 
-    const sqlCheckUser = "SELECT * FROM usuarios WHERE id = ? AND pass = ?";
+    const sqlCheckUser = "SELECT *, id_usuario AS id FROM usuarios WHERE id_usuario = ? AND pass = ?";
 
     db.query(sqlCheckUser, [userId, pass], (err, data) => {
         if (err) {
@@ -527,7 +567,7 @@ app.post('/toggle-2fa', (req, res) => {
             return res.status(401).json({ success: false, message: "Usuario no encontrado" });
         }
 
-        const sqlUpdate = "UPDATE usuarios SET is_2fa = ? WHERE id = ?";
+        const sqlUpdate = "UPDATE usuarios SET is_2fa = ? WHERE id_usuario = ?";
         db.query(sqlUpdate, [is_2fa ? 1 : 0, userId], (err, result) => {
             if (err) {
                 console.error("Error en query:", err.message);
@@ -545,7 +585,7 @@ app.post('/upload-profile-picture', upload.single('foto'), (req, res) => {
         return res.status(400).json({ success: false, message: "Faltan credenciales de usuario" });
     }
 
-    const sqlCheckUser = "SELECT * FROM usuarios WHERE id = ? AND pass = ?";
+    const sqlCheckUser = "SELECT *, id_usuario AS id FROM usuarios WHERE id_usuario = ? AND pass = ?";
 
     db.query(sqlCheckUser, [userId, pass], (err, data) => {
         if (err) {

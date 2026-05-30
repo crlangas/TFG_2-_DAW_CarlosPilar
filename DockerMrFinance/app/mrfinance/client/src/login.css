@@ -116,3 +116,10 @@ h2 {
   display: inline;
   width: 100%;
 }
+
+#ayuda {
+  font-weight: lighter !important;
+  color: gray !important;
+  font-size : small !important; 
+  text-align: center;
+}

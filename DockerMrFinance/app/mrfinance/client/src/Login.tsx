@@ -55,6 +55,12 @@ function LoginPage() {
               onSuccess={handleSuccess}
             />
           )}
+
+            <p id="ayuda">
+              Si olvidatste tu contraseña o tienes cualquier problema y no eres
+              dueno de esta instalación contacta a noreply.mrfinance@gmail.com
+            </p>
+
         </div>
       </div>
     </>
