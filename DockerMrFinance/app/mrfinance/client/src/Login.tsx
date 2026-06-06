@@ -33,7 +33,7 @@ function LoginPage() {
 
   return (
     <>
-      <main>
+      <main className="h-screen w-screen">
         <div id="cuerpo">
           {/* el class name s es una media query con taiwind para ocultar el lado negro en movil y tablet */}
           <div className="hidden! lg:flex!">
